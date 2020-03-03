@@ -1,0 +1,61 @@
+.form-control {
+    padding: 0.275rem 0.75rem !important;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.form-group.input-group select {
+    font-size: 24px;
+    text-align: center;
+    background-color: #689F38 !important;
+    color: #fff;
+}
+
+.form-group select {
+    text-align: center;
+    color: brown;
+    border: 2px solid brown;
+    border-radius: 4px;
+}
+
+.form-group label {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 9px;
+
+}
+
+/*Card Section*/
+
+.card-body h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #666;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+
+.card-body h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+.card-body h4 {
+    font-size: 18px;
+}
+
+.card-img-top {
+    border-radius: 4px !important;
+}
+
+.card-body hr {
+    margin-bottom: 25px;
+}
+
+.card-border:hover {
+    border: 2px dotted #003f5c;
+    border-radius: 5px;
+}

@@ -1,0 +1,213 @@
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+
+    <!-- sidebar-wrapper  -->
+    <main class="page-content">
+        <div class="container-fluid">
+            <h2 class="text-center"></h2>
+        </div>
+
+        <div class="row mt-3">
+            <!--left main row-->
+            <div class="col-md-5 student-table-border mr-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <div class="card">
+                            <h5 class="card-header text-center">Course Details</h5>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <!-- Row Start -->
+
+                    <div class="col-md-4">
+                        <form class="form-inline md-form form-sm mt-1">
+                            <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
+                            <input id="courseSearchField"
+                                class="form-control form-control-sm w-75 text-center search-button" type="text"
+                                placeholder="Search" aria-label="Search" onkeydown="return (event.keyCode!=13);">
+                        </form>
+                    </div>
+
+                    <div class="col-md-8">
+
+                        <div class="row">
+
+                            <div class="col-md-1 col-sm-6"> </div>
+
+                            <div class="col-md-6 text-left-margin-import">
+                                <button type="button" class="btn btn-success" id="courseImportBtn">Import</button>
+
+                                <input type="file" id="fileInput" style="display: none;" />
+                            </div>
+
+                            <div class="col-md-4 text-left-margin-add col-sm-6">
+                                <button class="btn btn-info" type="button" data-toggle="modal"
+                                    data-target="#exampleModal">Add</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="exampleModalLabel">Add Course</h3>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="form-group text-left mb-4">
+                                                        <label for="exampleInputEmail1">Course Code</label>
+                                                        <input type="text" class="form-control" id="courseCodeInput">
+                                                    </div>
+
+                                                    <div class="form-group text-left mt-3">
+                                                        <label for="exampleInputEmail1">Course Name</label>
+                                                        <input type="text" class="form-control" id="courseNameInput">
+                                                    </div>
+
+                                                    <div class="form-group text-left my-3">
+                                                        <label for="exampleInputPassword1">Credit</label>
+                                                        <input type="text" class="form-control" id="creditInput">
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-success mt-3"
+                                                            id="saveCourseBtn">Save</button>
+                                                        <button type="button" class="btn btn-danger mt-3 ml-2"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- End Modal -->
+                            </div>
+                        </div><!-- End Row -->
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="student-table-scrol">
+                        <div class="col-md-12 table-scroling">
+                            <div id="courseTable" class="ag-theme-balham" style="height: 100%;">
+                            </div>
+                        </div>
+                    </div> <!-- End Row -->
+
+                </div> <!-- col-md-8 end -->
+            </div>
+
+            <!-- ***************************************************************************************** -->
+
+            <!--   RIGHT MAIN ROW  -->
+            <div class="col-md-6 student-table-border">
+                <!-- Right Col -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <div class="card">
+                            <h5 class="card-header text-center">Faculty Details</h5>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <!-- Row Start -->
+
+                    <div class="col-md-4 search-text-right">
+                        <form class="form-inline md-form form-sm mt-1">
+                            <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
+                            <input id="facultySearchField"
+                                class="form-control form-control-sm ml-3 w-75 text-center search-button" type="text"
+                                placeholder="Search" aria-label="Search" onkeydown="return (event.keyCode!=13);">
+                        </form>
+                    </div>
+
+                    <div class="col-md-8">
+
+                        <div class="row">
+
+                            <div class="col-md-3 col-sm-6"> </div>
+
+                            <div class="col-md-4 text-right">
+                                <button type="button" class="btn btn-success" id="facultyImportBtn">Import</button>
+                                <input type="file" id="facultyFileInput" style="display: none;" />
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 add-btn">
+                                <!-- <h2>Add Student</h2> -->
+                                <button id="addFacultyBtn" class="btn btn-info" type="button" data-toggle="modal"
+                                    data-target="#exampleModal2">Add</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="exampleModalLabel2">Add Faculty</h3>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="form-group text-left mb-4">
+                                                        <label for="exampleInputEmail1">Faculty Initial</label>
+                                                        <input type="text" class="form-control" id="facultyIniInput">
+                                                    </div>
+
+                                                    <div class="form-group text-left mt-3">
+                                                        <label for="exampleInputEmail1">Faculty Name</label>
+                                                        <input type="text" class="form-control" id="facultyNameInput">
+                                                    </div>
+
+                                                    <div class="form-group text-left my-3">
+                                                        <label for="exampleInputPassword1">Designation</label>
+                                                        <input type="text" class="form-control" id="designationInput">
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-success mt-3"
+                                                            id="savefacultyBtn">Save</button>
+                                                        <button type="button" class="btn btn-danger mt-3 ml-2"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- End Modal -->
+                            </div>
+                        </div><!-- End Row -->
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="student-table-scrol">
+                        <div class="col-md-12 table-scroling">
+                            <div id="facultyTable" class="ag-theme-balham" style="height: 100%;">
+                            </div>
+                        </div>
+                    </div> <!-- End Row -->
+
+                </div> <!-- End Row -->
+
+            </div>
+        </div>
+    </main>
+    <!-- page-content" -->
+</div>
+<!-- page-wrapper -->

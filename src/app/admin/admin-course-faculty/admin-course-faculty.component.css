@@ -1,0 +1,98 @@
+.form-control {
+    padding: 0.275rem 0.75rem !important;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.search-btn {
+    margin-right: 22px;
+}
+
+.file-field input {
+    display: block;
+    width: 233px !important;
+}
+
+.form-group.input-group select {
+    font-size: 24px;
+    text-align: center;
+    background-color: #689F38 !important;
+    color: #fff;
+}
+
+.file-field input {
+    font-size: 24px !important;
+    height: 36px !important;
+}
+
+.form-group select {
+    text-align: center;
+    color: brown;
+    border: 2px solid brown;
+    border-radius: 4px;
+}
+
+.form-group label {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+.student-table-border {
+    box-shadow: 0px 4px 4px 0px #888;
+    border-radius: 5px;
+    border: 1px solid;
+    margin-left: 16px;
+}
+
+.col-md-12.table-scroling {
+    max-height: calc(100% - 5%);
+    height: calc(100% - 5%);
+    overflow-y: auto;
+    position: relative;
+}
+
+.student-table-scrol {
+    width: 635px;
+    z-index: 999;
+    height: 360px;
+}
+
+.add-btn {
+    margin-left: 24px !important;
+}
+
+.search-text-right {
+    margin-left: -16px;
+}
+
+.form-control.form-control-sm.ml-3.w-75.text-center.search-button {
+    width: 116px !important;
+    padding: 16px 0 !important;
+    margin-top: -3px !important;
+}
+
+.form-control.form-control-sm.w-75.text-center.search-button {
+    width: 116px !important;
+    padding: 16px 0 !important;
+    margin-top: -3px !important;
+}
+
+.card {
+    background-color: #10316b;
+    color: #fff;
+}
+
+.modal-body label {
+    font-size: 16px;
+}
+
+.text-left-margin-import {
+    margin-left: -12px;
+}
+
+.text-left-margin-add {
+    margin-left: -10px;
+}

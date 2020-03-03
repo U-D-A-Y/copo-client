@@ -1,0 +1,118 @@
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+    <!-- sidebar-wrapper  -->
+    <main class="page-content">
+        <div class="container-fluid">
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="semesterDisplayBtn" type="button" class="btn btn-success">Semester</button>
+                    <button id="yearDisplayBtn" type="button" class="btn btn-success">Year</button>
+                    <div class="row ml-second-row mt-5">
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-10 semester-year">
+                                    <div class="card">
+                                        <h5 class="card-header text-center crd-hd-pd">Semester & Year</h5>
+                                    </div>
+                                    <br>
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="mb-3" for="formGroupExampleInput">Semester</label>
+                                            <!-- <input type="text" class="form-control" id="semesterInput" placeholder="Current Semester"> -->
+                                            <select id="semesterInput" class="form-control">
+                                                <option value="spring">Spring</option>
+                                                <option value="summer">Summer</option>
+                                                <option value="fall">Fall</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <label class="mb-3" for="formGroupExampleInput2">Year</label>
+                                            <input type="text" class="form-control" id="yearInput">
+                                        </div>
+                                    </form>
+                                    <div class="form-group mt-5 text-center">
+                                        <button type="submit" id="semesterSaveBtn" class="btn btn-success btn-block">
+                                            Save </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-10 add-user">
+                                    <div class="card">
+                                        <h5 class="card-header text-center crd-hd-pd">Create User</h5>
+                                    </div>
+
+                                    <br>
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="mb-3" for="facultyInitialInput">Faculty Initial</label>
+                                            <input type="text" class="form-control" id="facultyInitialInput">
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <label class="mb-3" for="facultyPasswordInput">Password</label>
+                                            <input type="text" class="form-control" id="facultyPasswordInput">
+                                        </div>
+                                    </form>
+                                    <div class="form-group mt-5 text-center">
+                                        <button id="createUserBtn" type="submit" class="btn btn-success btn-block">
+                                            Create </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="row">
+                                <div class="col-md-12 faculty-course-student-card">
+                                    <div class="card text-white bg-info mb-3" style="max-width: 12rem;">
+                                        <div class="card-header">
+                                            <h5 class="text-center">Faculty</h5>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h3 id="facultyCount">32+</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 text-right">
+                                    <div class="card text-white bg-success mb-3" style="max-width: 12rem;">
+                                        <div class="card-header">
+                                            <h5 class="text-center">Courses</h5>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h3 id="courseCount">100+</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 text-right">
+                                    <div class="card text-white bg-primary mb-3" style="max-width: 12rem;">
+                                        <div class="card-header">
+                                            <h5 class="text-center">Students</h5>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h3 id="studentCount">2500+</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End Main Row -->
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- page-content" -->
+</div>

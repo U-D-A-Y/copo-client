@@ -2,21 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FacultyComponent } from './faculty/faculty.component';
 import { LeftBarComponent } from './left-bar/left-bar.component';
-import { RootComponent } from './root/root.component';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AdminModule } from './admin/admin.module';
 @NgModule({
-  declarations: [
-    AppComponent,
-    FacultyComponent,
-    LeftBarComponent,
-    RootComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LeftBarComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AdminModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
