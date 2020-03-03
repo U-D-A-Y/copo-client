@@ -6,6 +6,7 @@ import { LeftBarComponent } from './left-bar/left-bar.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -13,8 +14,8 @@ import { AdminModule } from './admin/admin.module';
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
         AdminModule,
+        AppRoutingModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
