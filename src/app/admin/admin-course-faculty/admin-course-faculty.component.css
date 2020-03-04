@@ -96,3 +96,7 @@
 .text-left-margin-add {
     margin-left: -10px;
 }
+
+.page-wrapper.toggled .page-content {
+    padding-left: 20px;
+}

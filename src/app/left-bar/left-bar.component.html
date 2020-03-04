@@ -1,4 +1,107 @@
-<nav>
-    <a routerLink="/admin/dashboard">Dashboard</a> <br>
-    <a routerLink="/admin/course_faculty">Course Faculty</a>
+<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+</a>
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+        <div class="sidebar-brand text-center">
+            <a href="#dashboard.html">East West University</a>
+        </div>
+        <div class="sidebar-header">
+            <div class="user-pic">
+                <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" alt="User picture">
+            </div>
+            <div class="user-info mt-1">
+                <span class="user-name">
+                    <strong>Dr. Taskeed Jabid</strong>
+                </span>
+                <span class="user-role">Administrator</span>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li class="header-menu text-center">
+                    <br>
+                </li>
+                <hr>
+                <li class="sidebar-dropdown" id="active">
+                    <a routerLink="admin/dashboard">
+                        <i class="fa fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                        <hr>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a routerLink="admin/course_faculty">
+                        <i class="fas fa-address-book"></i>
+                        <span>Course Faculty</span>
+                        <hr>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="student">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Student List</span>
+                        <hr>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="course_offering_2">
+                        <i class="far fa-gem"></i>
+                        <span>Course Offering</span>
+                        <hr>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="course_offering">
+                        <i class="far fa-gem"></i>
+                        <span>Section Offering</span>
+                        <hr>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="copo_mapping">
+                        <i class="far fa-gem"></i>
+                        <span>COPO Map</span>
+                        <hr>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="reports">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Report</span>
+                        <hr>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="charts.html">
+                        <i class="fa fa-chart-line"></i>
+                        <span>Charts</span>
+                        <hr>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="adminProfile">
+                        <i class="fa fa-chart-line"></i>
+                        <span>Profile</span>
+                        <hr>
+                    </a>
+                </li>
+            </ul>
+            <button class="btn btn-danger mt-5 ml-5"> Logout</button>
+        </div>
+        <!-- sidebar-menu  -->
+    </div>
 </nav>
+
+<script>
+    let logoutBtn = document.getElementsByClassName('btn-danger')[0];
+    logoutBtn.addEventListener('click', function(event) {
+        axios.post('/auth/logout')
+            .then(result => {
+                window.location.href = '/';
+            })
+            .catch(err => {
+                window.location.href = '/';
+            })
+    })
+</script>
