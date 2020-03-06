@@ -54,4 +54,15 @@ export class AdminDashboardService {
         //     throw err;
         // })
     }
+
+    createUser(fi, fp) {
+        const apiUrl = this.proxyPrefix + '/auth/createAccount';
+        return this.http.post(apiUrl, {username: fi, password: fp, role: 'faculty'})
+        .pipe(
+            map(result => {
+                result = result["data"];
+                return result;
+            })
+        )
+    }
 }
