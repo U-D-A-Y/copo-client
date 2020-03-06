@@ -9,14 +9,49 @@ export class AdminDashboardService {
 
     constructor(private http: HttpClient) { }
 
-    semApiUrl = "http://localhost:4200/api/common/semester/currentSemester";
+    proxyPrefix = "/api";
 
+    
     getCurrentSemesterAndYear() {
-        return this.http.get(this.semApiUrl)
+        let semApiUrl = this.proxyPrefix + "/api/common/semester/currentSemester";
+        return this.http.get(semApiUrl)
         .pipe(
             map(response => {
                 return response["data"];
             })
         )
+    }
+
+    getDashboardTotals() {
+        const apiURL = this.proxyPrefix + `/admin/adminApi/dashboard/totals`;
+        return this.http.get(apiURL)
+        .pipe(
+            map(result => {
+                console.log(result);
+                result = result["data"];
+                return result;
+            })
+        )
+    }
+
+    updateCurrentSemester = (semester, year) => {
+        const apiUrl = this.proxyPrefix + `/admin/adminApi/semester/currentSemester`;
+        return this.http.post(apiUrl, {
+            data: {semester, year}
+        })
+        .pipe(
+            map(result => {
+                result = result["data"];
+                return result;
+            })
+        )
+        // .catch(err => {
+        //     console.log(err);
+        //     let reason = err.response.data;
+        //     if (resson = 'ERR_EMPTY') {
+        //         alert('Add this semester first');
+        //     }
+        //     throw err;
+        // })
     }
 }

@@ -20,7 +20,7 @@
                                         <div class="form-group">
                                             <label class="mb-3" for="formGroupExampleInput">Semester</label>
                                             <!-- <input type="text" class="form-control" id="semesterInput" placeholder="Current Semester"> -->
-                                            <select id="semesterInput" class="form-control">
+                                            <select #semesterInput id="semesterInput" class="form-control">
                                                 <option value="spring">Spring</option>
                                                 <option value="summer">Summer</option>
                                                 <option value="fall">Fall</option>
@@ -28,12 +28,14 @@
                                         </div>
                                         <div class="form-group my-3">
                                             <label class="mb-3" for="formGroupExampleInput2">Year</label>
-                                            <input type="text" class="form-control" id="yearInput">
+                                            <input #yearInput type="text" class="form-control" id="yearInput">
                                         </div>
                                     </form>
                                     <div class="form-group mt-5 text-center">
-                                        <button type="submit" id="semesterSaveBtn" class="btn btn-success btn-block">
-                                            Save </button>
+                                        <button (click)="handleSemesterUpdate(semesterInput.value, yearInput.value)" 
+                                            type="submit" id="semesterSaveBtn" class="btn btn-success btn-block">
+                                            Save 
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +76,7 @@
                                             <h5 class="text-center">Faculty</h5>
                                         </div>
                                         <div class="card-body text-center">
-                                            <h3 id="facultyCount">32+</h3>
+                                            <h3 id="facultyCount">{{facultyCount}}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +88,7 @@
                                             <h5 class="text-center">Courses</h5>
                                         </div>
                                         <div class="card-body text-center">
-                                            <h3 id="courseCount">100+</h3>
+                                            <h3 id="courseCount">{{courseCount}}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +100,7 @@
                                             <h5 class="text-center">Students</h5>
                                         </div>
                                         <div class="card-body text-center">
-                                            <h3 id="studentCount">2500+</h3>
+                                            <h3 id="studentCount">{{studentCount}}</h3>
                                         </div>
                                     </div>
                                 </div>
