@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -30,7 +31,8 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
     ],
     imports: [
         CommonModule,
-        AdminRoutingModule
+        AdminRoutingModule,
+        AgGridModule,
     ]
 })
 export class AdminModule { }

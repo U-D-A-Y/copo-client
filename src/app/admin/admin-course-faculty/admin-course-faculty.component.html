@@ -94,8 +94,14 @@
                 <div class="row">
                     <div class="student-table-scrol">
                         <div class="col-md-12 table-scroling">
-                            <div id="courseTable" class="ag-theme-balham" style="height: 100%;">
-                            </div>
+                            <!-- <div id="courseTable" class="ag-theme-balham" style="height: 100%;">
+                            </div> -->
+                            <ag-grid-angular
+                                style="height: 100%;"
+                                class="ag-theme-balham"
+                                [columnDefs]="colDefs"
+                                >
+                            </ag-grid-angular>
                         </div>
                     </div> <!-- End Row -->
 

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppComponent } from './app.component';
 import { LeftBarComponent } from './left-bar/left-bar.component';
@@ -15,9 +16,10 @@ import { AdminModule } from './admin/admin.module';
     ],
     imports: [
         BrowserModule,
+        AgGridModule.withComponents([]),
         AdminModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
