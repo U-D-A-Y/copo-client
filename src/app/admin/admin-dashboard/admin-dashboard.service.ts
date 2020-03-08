@@ -18,7 +18,8 @@ export class AdminDashboardService {
         .pipe(
             map(response => {
                 return response["data"];
-            })
+            }),
+            catchError(err => {throw err})
         )
     }
 

@@ -1,0 +1,68 @@
+
+.row.ml-11 {
+    margin-left: -15px;
+}
+
+.form-control.form-control-sm.w-75.text-center.search-button {
+    padding: 1rem .75rem !important;
+}
+
+.w-75 {
+    width: 89% !important;
+}
+
+.form-control {
+    padding: 0.275rem 0.75rem !important;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.page-wrapper.toggled .page-content {
+    padding-left: 20px;
+}
+
+.file-field input {
+    display: block;
+    width: 233px !important;
+}
+
+.form-group.input-group select {
+    font-size: 24px;
+    text-align: center;
+    background-color: #689F38 !important;
+    color: #fff;
+}
+
+.select-same-font button {
+    font-size: 24px;
+}
+
+.file-field input {
+    font-size: 24px !important;
+    height: 36px !important;
+}
+
+.form-group select {
+    text-align: center;
+}
+
+.student-table-border {
+    box-shadow: 0px 4px 4px 0px #888;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.col-md-12.table-scroling {
+    max-height: calc(100% - 5%);
+    height: calc(100% - 5%);
+    overflow-y: auto;
+    position: relative;
+}
+
+.student-table-scrol {
+    width: 1028px;
+    z-index: 999;
+    height: 420px;
+}

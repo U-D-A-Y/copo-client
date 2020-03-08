@@ -1,0 +1,56 @@
+
+label {
+  font-size: 18px;
+}
+
+h3 {
+  text-align: center;
+}
+
+.update-btn {
+  font-size: 17px;
+  padding: 0.475rem 2.55rem !important;
+}
+
+.form-group label {
+  margin-bottom: 0px;
+}
+
+.btn {
+  padding: 0.375rem 2.75rem;
+}
+
+.svg-inline--fa {
+  margin-right: 6px !important;
+}
+
+.sidebar-wrapper .sidebar-brand a {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  color: white !important;
+  cursor: none;
+}
+
+.header-menu span {
+  font-size: 20px !important;
+}
+
+.page-wrapper.toggled .page-content {
+  padding-left: 20px;
+}
+
+.sidebar-dropdown::before {
+  position: absolute;
+  width: 4px;
+  background: green;
+  height: 35px;
+  content: "";
+  margin-top: -4px;
+  left: 7px;
+}
+
+.sidebar-dropdown:hover:before {
+  background: 
+  red !important;
+  width: 8px;
+}

@@ -1,0 +1,134 @@
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+    <!-- sidebar-wrapper  -->
+    <main class="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Start First Row -->
+
+                <div class="col-md-12">
+                    <!--Start Left Col -->
+
+                    <div class="row">
+                        <!-- Start Course & Section Row -->
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <button id="semesterDisplayBtn" type="button"
+                                        class="btn btn-success">Spring</button>
+                                </div>
+
+                                <div class="col-md-3 col-sm-6">
+                                    <button id="yearDisplayBtn" type="button" class="btn btn-danger">2019</button>
+                                </div>
+
+                                <div class="col-md-6"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+
+                        <!-- <div class="col-md-8">
+                <marquee>
+                  <h5 id="date"> Thursday, 28 November, 2019 </h5>
+                </marquee>
+              </div> -->
+
+                    </div> <!-- End Course & Section Row -->
+                    <hr>
+                    <div class="student-mark-input-table-border mt-2">
+                        <div class="row mt-3">
+                            <div class="col-md-4 mt-1 text-right">
+                                <form class="form-inline md-form form-sm">
+                                    <input id="sectionSearch" class="form-control form-control-sm ml-3 w-75 text-center"
+                                        type="text" placeholder="Search" aria-label="Search">
+                                </form>
+                                <br>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-3 mr-2">
+                                        <button type="button" id="sectionImportBtn"
+                                            class="btn btn-danger import-btn">Import</button>
+                                        <input type="file" id="fileInput" accept=".csv" style="display: none" />
+                                    </div>
+
+                                    <div class="col-md-3 ml-1">
+                                        <button id="addSectionBtn" class="btn btn-success" type="button"
+                                            data-toggle="modal" data-target="#sectionAddModal">Add</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="sectionAddModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalLabel">Offering Course
+                                                        </h3>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="form-group text-left mb-4">
+                                                                <label for="exampleInputEmail1">Course Code</label>
+                                                                <input type="text" id="courseInput"
+                                                                    class="form-control">
+                                                            </div>
+
+                                                            <div class="form-group text-left mt-3">
+                                                                <label for="exampleInputEmail1">Faculty Initial</label>
+                                                                <input id="facultyInput" type="text"
+                                                                    class="form-control">
+                                                            </div>
+
+                                                            <div class="form-group text-left my-3">
+                                                                <label for="exampleInputPassword1">Section</label>
+                                                                <input id="sectionInput" type="text"
+                                                                    class="form-control">
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" id="sectionSaveBtn"
+                                                                    class="btn btn-success mt-3">Save</button>
+                                                                <button type="button" class="btn btn-danger mt-3 ml-2"
+                                                                    data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- End Modal -->
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- End Assessment drop down & Search Row -->
+
+                        <div class="row mt-2">
+                            <!-- Start mark input Row -->
+                            <div class="student-table-scrol">
+                                <div class="col-md-12 table-scroling ml-1">
+                                    <div id="sectionTable" class="ag-theme-balham" style="height: 100%;">
+                                    </div>
+                                </div>
+                            </div> <!-- End mark input Row -->
+                        </div>
+
+                    </div> <!-- End Left Col -->
+                </div> <!-- End First Row -->
+
+            </div> <!-- Container Fluid End -->
+        </div>
+    </main>
+    <!-- page-content" -->
+</div>
+<!-- page-wrapper -->

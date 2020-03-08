@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './admin.component';
 
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminCourseFacultyComponent } from './admin-course-faculty/admin-course-faculty.component';
+import { AdminCopoComponent } from './admin-copo/admin-copo.component';
+import { AdminCourseComponent } from './admin-course/admin-course.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AdminSectionsComponent } from './admin-sections/admin-sections.component';
+import { AdminStudentsComponent } from './admin-students/admin-students.component';
+import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 
 const routes: Routes = [
     {
@@ -18,23 +24,26 @@ const routes: Routes = [
                 path: 'course_faculty',
                 component: AdminCourseFacultyComponent,
             }, {
-                path: 'student',
-                component: AdminDashboardComponent,
+                path: 'students',
+                component: AdminStudentsComponent,
             }, {
                 path: 'course_offering',
-                component: AdminDashboardComponent,
+                component: AdminCourseComponent,
             }, {
                 path: 'section_offering',
-                component: AdminDashboardComponent,
+                component: AdminSectionsComponent,
             }, {
-                path: 'copo_mapping',
-                component: AdminDashboardComponent,
+                path: 'copo',
+                component: AdminCopoComponent,
             }, {
                 path: 'reports',
-                component: AdminDashboardComponent,
+                component: AdminReportsComponent,
             }, {
                 path: 'charts',
                 component: AdminDashboardComponent,
+            }, {
+                path: 'profile',
+                component: AdminProfileComponent,
             }
         ]
     }
