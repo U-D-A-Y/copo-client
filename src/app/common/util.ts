@@ -2,7 +2,7 @@
 
 const getSelector = id => document.getElementById(id);
 
-const getSelectedOptionText = (selector) => {
+export const getSelectedOptionText = (selector) => {
     let text = selector.options[selector.selectedIndex].text;
     return text;
 }
@@ -13,22 +13,22 @@ const getSelectedOptionValue = (selector) => {
 }
 
 
-const getRegistedCourses = () => {
-    return axios.get('teacherApi/getRegisteredSections/')
-        .then((result) => {
-            result = result.data;
-            // console.log(result);
-            if (result.success === true) {
-                // return courseInformation = result.data;
-                return result.data;
-            }
-        })
-}
+// const getRegistedCourses = () => {
+//     return axios.get('teacherApi/getRegisteredSections/')
+//         .then((result) => {
+//             result = result.data;
+//             // console.log(result);
+//             if (result.success === true) {
+//                 // return courseInformation = result.data;
+//                 return result.data;
+//             }
+//         })
+// }
 
 
 const populateSelect = (selector, data) => {
     selector.length = 1;
-    for (code of data) {
+    for (let code of data) {
         let option = document.createElement('option');
         option.text = code;
         selector.appendChild(option);
@@ -56,7 +56,7 @@ const getAgGridOptions = (opts = {}) => {
 }
 
 
-const getAgGridAllData = grid => {
+export const getAgGridAllData = grid => {
     let data = [];
     grid.api.forEachNode(node => {
         data.push(node.data);

@@ -1,8 +1,7 @@
 import {constants} from './constants';
-// const renderers = getRenderers();
+import {ActionCellRenderer, SaveCellRenderer} from './renderer';
 // const editors = getCellEditors();
 
-// const constants = getFixedValues();
 
 const generateColDef = (field, headerName, opts = {}) => {
     let colDef = {};
@@ -115,28 +114,28 @@ const slColumn = {
     minWidth: 35,
     maxWidth: 45,
     suppressNavigable: true,
-    supressSizeToFit: true,
+    suppressSizeToFit: true,
     cellStyle: { textAlign: 'center' },
     pinned: 'left'
 }
 
-// const actionColumn = {
-//     editable: false,
-//     headerName: constants.action,
-//     cellRenderer: renderers.getActionRenderer(),
-//     minWidth: 30,
-//     maxWidth: 60,
-//     cellStyle: { textAlign: 'center' }
-// }
+const actionColumn = {
+    editable: false,
+    headerName: constants.action,
+    cellRenderer: ActionCellRenderer,
+    minWidth: 30,
+    maxWidth: 60,
+    cellStyle: { textAlign: 'center' }
+}
 
-// const saveColumn = {
-//     editable: false,
-//     headerName: constants.action,
-//     cellRenderer: renderers.getSaveRenderer(),
-//     minWidth: 30,
-//     maxWidth: 60,
-//     cellStyle: { textAlign: 'center' }
-// }
+const saveColumn = {
+    editable: false,
+    headerName: constants.action,
+    cellRenderer: SaveCellRenderer,
+    minWidth: 30,
+    maxWidth: 60,
+    cellStyle: { textAlign: 'center' }
+}
 /* END - SPECIAL COLUMNS */
 
 /*  OBE1 COLUMNS DEFINITIONS  */
@@ -214,12 +213,244 @@ export const getAdminCourses = () => {
                 minWidth: 40
             })
         },
-        // { ...actionColumn },
+        { ...actionColumn },
     ]
     colDefs = addOptionToAllColumn(colDefs, {
         cellStyle: { textAlign: 'center' }
     }, ['#'])
-    console.log(colDefs);
+    // console.log(colDefs);
+    return colDefs;
+}
+
+
+export const getAdminFaculty = () => {
+    let colDefs = [
+        { ...slColumn },
+        {
+            ...generateColDef('faculty_initial', constants.faculty_initial, {
+                width: 70
+            })
+        },
+        {
+            ...generateColDef('faculty_name', constants.faculty_name, {
+                minWidth: 200
+            })
+        },
+        {
+            ...generateColDef('designation', constants.designation, {
+                minWidth: 130
+            })
+        },
+        { ...saveColumn },
+        { ...actionColumn }
+    ]
+    return colDefs;
+}
+
+export const getAdminSections = () => {
+    let colDefs = [
+        { ...slColumn },
+        { ...generateColDef('course_code', constants.course_code) },
+        { ...generateColDef('faculty_initial', constants.faculty_initial) },
+        { ...generateColDef('faculty_name', constants.faculty_name) },
+        { ...generateColDef('section', constants.section) },
+        { ...actionColumn }
+    ]
+    return colDefs;
+}
+
+export const getAdminStudents = () => {
+    let colDefs = [
+        {
+            ...slColumn
+        },
+        {
+            ...generateColDef('student_id', constants.student_id)
+        },
+        {
+            ...generateColDef('student_name', constants.student_name)
+        },
+        {
+            ...actionColumn
+        }
+    ]
+    return colDefs;
+}
+
+/**
+ * PO Reports of Student
+ */
+export const getStudentPoReport = () => {
+    let colDefs = [
+        generateColDef('student_id', constants.student_id, {
+            rowSpan: function (params) {
+                if (params.data.student_id) {
+                    return params.data.span;
+                } else {
+                    return 1;
+                }
+            },
+            minWidth: 100,
+            cellClassRules: {
+                'show-cell': 'value !== undefined'
+            }
+        }),
+        generateColDef('student_name', constants.student_name, {
+            rowSpan: function (params) {
+                if (params.data.student_id) {
+                    return params.data.span;
+                } else {
+                    return 1;
+                }
+            },
+            cellClassRules: {
+                'show-cell': 'value !== undefined'
+            },
+            minWidth: 200
+        }),
+        generateColDef('po', constants.po),
+        generateColDef('dist', constants.po_dist, {
+            valueFormatter: function (params) {
+                const cellValue = params.value;
+                let precision = 3;
+                if (typeof (cellValue) === "number") {
+                    return cellValue.toFixed(precision);
+                } else if (typeof (cellValue) === "string") {
+                    return parseFloat(cellValue).toFixed(precision);
+                } else {
+                    return undefined;
+                }
+            }
+        })
+    ]
+    return colDefs;
+}
+
+
+export const getCoursePoReport = () => {
+    let colDefs = [
+        generateColDef('course_code', constants.course_code, {
+            rowSpan: function (params) {
+                if (params.data.course_code) {
+                    return params.data.span;
+                } else {
+                    return 1;
+                }
+            },
+            cellClassRules: {
+                'show-cell': 'value !== undefined'
+            },
+            minWidth: 100
+        }),
+        generateColDef('po', constants.po),
+        generateColDef('dist', constants.po_dist, {
+            valueFormatter: function (params) {
+                const cellValue = params.value;
+                let precision = 3;
+                if (typeof (cellValue) === "number") {
+                    return cellValue.toFixed(precision);
+                } else if (typeof (cellValue) === "string") {
+                    return parseFloat(cellValue).toFixed(precision);
+                } else {
+                    return undefined;
+                }
+            }
+        })
+    ]
+    return colDefs;
+}
+
+
+export const getCourseAndStudentPoReport = () => {
+    let colDefs = [
+        generateColDef('course_code', constants.course_code, {
+            rowSpan: function (params) {
+                if (params.data.course_code) {
+                    return params.data.courseSpan;
+                } else {
+                    return 1;
+                }
+            },
+            cellClassRules: {
+                'show-cell': 'value !== undefined'
+            },
+            minWidth: 100
+        }),
+        generateColDef('student_id', constants.student_id, {
+            rowSpan: function (params) {
+                if (params.data.student_id) {
+                    return params.data.studentSpan;
+                } else {
+                    return 1;
+                }
+            },
+            cellClassRules: {
+                'show-cell': 'value !== undefined'
+            },
+            minWidth: 100
+        }),
+        generateColDef('student_name', constants.student_name, {
+            rowSpan: function (params) {
+                if (params.data.student_name) {
+                    return params.data.studentSpan;
+                } else {
+                    return 1;
+                }
+            },
+            cellClassRules: {
+                'show-cell': 'value !== undefined'
+            },
+            minWidth: 150
+        }),
+        generateColDef('po', constants.po),
+        generateColDef('dist', constants.po_dist, {
+            valueFormatter: function (params) {
+                const cellValue = params.value;
+                let precision = 3;
+                if (typeof (cellValue) === "number") {
+                    return cellValue.toFixed(precision);
+                } else if (typeof (cellValue) === "string") {
+                    return parseFloat(cellValue).toFixed(precision);
+                } else {
+                    return undefined;
+                }
+            }
+        })
+    ];
+    return colDefs;
+}
+
+export const getCOPO = () => {
+    let poCols = (() => {
+        let cols = [];
+        let keyName = "mapping";
+        for (let i=1; i<=12; i++) {
+            cols.push({
+                headerName: `PO${i}`,
+                field: `${keyName}.PO${i}`,
+                cellClass: function(params) {
+                    if (!params.value) {
+                        return 'empty-copo-value';
+                    }
+                },
+                cellStyle: {
+                    textAlign: 'center'
+                }
+            })
+        }
+        return cols;
+    })();
+
+    let colDefs = [
+        // { headerName:'CO/PO', field:'co', width: 60},
+        generateColDef('co', constants.co_po, {
+            minWidth: 60,
+            cellStyle: {textAlign: 'center'},
+            editable: false,
+            cellClass: 'cell-disabled'
+        }),
+        ...poCols
+    ]
     return colDefs;
 }
 
@@ -745,231 +976,5 @@ export const getAdminCourses = () => {
 
 //     // ADMIN ADMIN
 
-//     getAdminFaculty: () => {
-//         let colDefs = [
-//             { ...slColumn },
-//             {
-//                 ...generateColDef('faculty_initial', constants.faculty_initial, {
-//                     width: 70
-//                 })
-//             },
-//             {
-//                 ...generateColDef('faculty_name', constants.faculty_name, {
-//                     minWidth: 200
-//                 })
-//             },
-//             {
-//                 ...generateColDef('designation', constants.designation, {
-//                     minWidth: 130
-//                 })
-//             },
-//             { ...saveColumn },
-//             { ...actionColumn }
-//         ]
-//         return colDefs;
-//     },
-
-//     getAdminSections: () => {
-//         let colDefs = [
-//             { ...slColumn },
-//             { ...generateColDef('course_code', constants.course_code) },
-//             { ...generateColDef('faculty_initial', constants.faculty_initial) },
-//             { ...generateColDef('faculty_name', constants.faculty_name) },
-//             { ...generateColDef('section', constants.section) },
-//             { ...actionColumn }
-//         ]
-//         return colDefs;
-//     },
-
-//     getAdminStudents: () => {
-//         let colDefs = [
-//             {
-//                 ...slColumn
-//             },
-//             {
-//                 ...generateColDef('student_id', constants.student_id)
-//             },
-//             {
-//                 ...generateColDef('student_name', constants.student_name)
-//             },
-//             {
-//                 ...actionColumn
-//             }
-//         ]
-//         return colDefs;
-//     },
-
-//     /**
-//      * PO Reports of Student
-//      */
-//     getStudentPoReport: () => {
-//         let colDefs = [
-//             generateColDef('student_id', constants.student_id, {
-//                 rowSpan: function (params) {
-//                     if (params.data.student_id) {
-//                         return params.data.span;
-//                     } else {
-//                         return 1;
-//                     }
-//                 },
-//                 minWidth: 100,
-//                 cellClassRules: {
-//                     'show-cell': 'value !== undefined'
-//                 }
-//             }),
-//             generateColDef('student_name', constants.student_name, {
-//                 rowSpan: function (params) {
-//                     if (params.data.student_id) {
-//                         return params.data.span;
-//                     } else {
-//                         return 1;
-//                     }
-//                 },
-//                 cellClassRules: {
-//                     'show-cell': 'value !== undefined'
-//                 },
-//                 minWidth: 200
-//             }),
-//             generateColDef('po', constants.po),
-//             generateColDef('dist', constants.po_dist, {
-//                 valueFormatter: function (params) {
-//                     const cellValue = params.value;
-//                     let precision = 3;
-//                     if (typeof (cellValue) === "number") {
-//                         return cellValue.toFixed(precision);
-//                     } else if (typeof (cellValue) === "string") {
-//                         return parseFloat(cellValue).toFixed(precision);
-//                     } else {
-//                         return undefined;
-//                     }
-//                 }
-//             })
-//         ]
-//         return colDefs;
-//     },
-//     getCoursePoReport: () => {
-//         let colDefs = [
-//             generateColDef('course_code', constants.course_code, {
-//                 rowSpan: function (params) {
-//                     if (params.data.course_code) {
-//                         return params.data.span;
-//                     } else {
-//                         return 1;
-//                     }
-//                 },
-//                 cellClassRules: {
-//                     'show-cell': 'value !== undefined'
-//                 },
-//                 minWidth: 100
-//             }),
-//             generateColDef('po', constants.po),
-//             generateColDef('dist', constants.po_dist, {
-//                 valueFormatter: function (params) {
-//                     const cellValue = params.value;
-//                     let precision = 3;
-//                     if (typeof (cellValue) === "number") {
-//                         return cellValue.toFixed(precision);
-//                     } else if (typeof (cellValue) === "string") {
-//                         return parseFloat(cellValue).toFixed(precision);
-//                     } else {
-//                         return undefined;
-//                     }
-//                 }
-//             })
-//         ]
-//         return colDefs;
-//     },
-
-//     getCourseAndStudentPoReport: () => {
-//         let colDefs = [
-//             generateColDef('course_code', constants.course_code, {
-//                 rowSpan: function (params) {
-//                     if (params.data.course_code) {
-//                         return params.data.courseSpan;
-//                     } else {
-//                         return 1;
-//                     }
-//                 },
-//                 cellClassRules: {
-//                     'show-cell': 'value !== undefined'
-//                 },
-//                 minWidth: 100
-//             }),
-//             generateColDef('student_id', constants.student_id, {
-//                 rowSpan: function (params) {
-//                     if (params.data.student_id) {
-//                         return params.data.studentSpan;
-//                     } else {
-//                         return 1;
-//                     }
-//                 },
-//                 cellClassRules: {
-//                     'show-cell': 'value !== undefined'
-//                 },
-//                 minWidth: 100
-//             }),
-//             generateColDef('student_name', constants.student_name, {
-//                 rowSpan: function (params) {
-//                     if (params.data.student_name) {
-//                         return params.data.studentSpan;
-//                     } else {
-//                         return 1;
-//                     }
-//                 },
-//                 cellClassRules: {
-//                     'show-cell': 'value !== undefined'
-//                 },
-//                 minWidth: 150
-//             }),
-//             generateColDef('po', constants.po),
-//             generateColDef('dist', constants.po_dist, {
-//                 valueFormatter: function (params) {
-//                     const cellValue = params.value;
-//                     let precision = 3;
-//                     if (typeof (cellValue) === "number") {
-//                         return cellValue.toFixed(precision);
-//                     } else if (typeof (cellValue) === "string") {
-//                         return parseFloat(cellValue).toFixed(precision);
-//                     } else {
-//                         return undefined;
-//                     }
-//                 }
-//             })
-//         ];
-//         return colDefs;
-//     },
-
-//     getCOPO: () => {
-//         let poCols = (() => {
-//             let cols = [];
-//             let keyName = "mapping";
-//             for (let i=1; i<=12; i++) {
-//                 cols.push({
-//                     headerName: `PO${i}`,
-//                     field: `${keyName}.PO${i}`,
-//                     cellClass: function(params) {
-//                         if (!params.value) {
-//                             return 'empty-copo-value';
-//                         }
-//                     },
-//                     cellStyle: {
-//                         textAlign: 'center'
-//                     }
-//                 })
-//             }
-//             return cols;
-//         })();
-
-//         let colDefs = [
-//             // { headerName:'CO/PO', field:'co', width: 60},
-//             generateColDef('co', constants.co_po, {
-//                 minWidth: 60,
-//                 cellStyle: {textAlign: 'center'},
-//                 editable: false,
-//                 cellClass: 'cell-disabled'
-//             }),
-//             ...poCols
-//         ]
-//         return colDefs;
-//     }
+//     
 // }
