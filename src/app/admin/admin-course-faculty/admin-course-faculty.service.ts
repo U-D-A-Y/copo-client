@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
 
 import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class AdminCourseFacultyService {
@@ -10,44 +11,28 @@ export class AdminCourseFacultyService {
     private proxyPrefix = "/api";
 
     getAllCourses() {
-        let apiUrl = this.proxyPrefix + "/admin/adminAPi/getAllCourses";
+        let apiUrl = this.proxyPrefix + "/admin/courses";
         return this.http.get(apiUrl)
         .pipe(
             map(result => {
                 return result["data"];
+            }),
+            catchError(error => {
+                throw error;
             })
         )
-            // .then(result => {
-            //     result = result.data;
-            //     if (result.success) {
-            //         return result.data;
-            //     } else {
-            //         return [];
-            //     }
-            // })
-            // .catch(err => {
-            //     console.log(err);
-            // })
     }
 
     getAllFaculty() {
-        let apiUrl = this.proxyPrefix + '/admin/adminApi/getAllFaculty'
+        let apiUrl = this.proxyPrefix + '/admin/faculties'
         return this.http.get(apiUrl)
         .pipe(
             map(result => {
                 return result["data"];
+            }),
+            catchError(error => {
+                throw error;
             })
         )
-            // .then(result => {
-            //     result = result.data;
-            //     if (result.success) {
-            //         return result.data;
-            //     } else {
-            //         return [];
-            //     }
-            // })
-            // .catch(err => {
-            //     console.log(err);
-            // })
     }
 }

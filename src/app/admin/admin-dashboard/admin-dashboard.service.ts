@@ -13,7 +13,7 @@ export class AdminDashboardService {
 
     
     getCurrentSemesterAndYear() {
-        let semApiUrl = this.proxyPrefix + "/api/common/semester/currentSemester";
+        let semApiUrl = this.proxyPrefix + "/common/semester/current";
         return this.http.get(semApiUrl)
         .pipe(
             map(response => {
@@ -24,7 +24,7 @@ export class AdminDashboardService {
     }
 
     getDashboardTotals() {
-        const apiURL = this.proxyPrefix + `/admin/adminApi/dashboard/totals`;
+        const apiURL = this.proxyPrefix + `/admin/dashboard/totals`;
         return this.http.get(apiURL)
         .pipe(
             map(result => {
@@ -36,7 +36,7 @@ export class AdminDashboardService {
     }
 
     updateCurrentSemester = (semester, year) => {
-        const apiUrl = this.proxyPrefix + `/admin/adminApi/semester/currentSemester`;
+        const apiUrl = this.proxyPrefix + `/admin/semester/current`;
         return this.http.post(apiUrl, {
             data: {semester, year}
         })
@@ -44,20 +44,19 @@ export class AdminDashboardService {
             map(result => {
                 result = result["data"];
                 return result;
+            }),
+            catchError(error => {
+                let reason = error["response"]["data"];
+                if (reason === 'ERR_EMPTY') {
+                    alert('Add this semester first');
+                }
+                throw error;
             })
         )
-        // .catch(err => {
-        //     console.log(err);
-        //     let reason = err.response.data;
-        //     if (resson = 'ERR_EMPTY') {
-        //         alert('Add this semester first');
-        //     }
-        //     throw err;
-        // })
     }
 
     createUser(fi, fp) {
-        const apiUrl = this.proxyPrefix + '/auth/createAccount';
+        const apiUrl = this.proxyPrefix + '/auth/account';
         return this.http.post(apiUrl, {username: fi, password: fp, role: 'faculty'})
         .pipe(
             map(result => {
