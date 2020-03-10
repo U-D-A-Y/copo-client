@@ -105,8 +105,15 @@
                             <!-- Start mark input Row -->
                             <div class="student-table-scrol">
                                 <div class="col-md-12 table-scroling ml-1">
-                                    <div id="sectionTable" class="ag-theme-balham" style="height: 100%;">
-                                    </div>
+                                    <!-- <div id="sectionTable" class="ag-theme-balham" style="height: 100%;">
+                                    </div> -->
+                                    <ag-grid-angular
+                                        [columnDefs]="colDefs"
+                                        [rowData]="rowData | async"
+                                        style="height: 100%;"
+                                        class="ag-theme-balham"
+                                    >
+                                    </ag-grid-angular>
                                 </div>
                             </div> <!-- End mark input Row -->
                         </div>

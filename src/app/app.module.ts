@@ -6,18 +6,23 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AppComponent } from './app.component';
 import { LeftBarComponent } from './left-bar/left-bar.component';
 
+import { LeftBarAdminComponent } from './left-bar/left-bar-admin/left-bar-admin.component';
+import { LeftBarFacultyComponent } from './left-bar/left-bar-faculty/left-bar-faculty.component';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
+import { FacultyModule } from './faculty/faculty.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        LeftBarComponent,
+        LeftBarComponent, LeftBarAdminComponent, LeftBarFacultyComponent
     ],
     imports: [
         BrowserModule,
         AgGridModule.withComponents([]),
         AdminModule,
+        FacultyModule,
         AppRoutingModule,
         HttpClientModule,
     ],
