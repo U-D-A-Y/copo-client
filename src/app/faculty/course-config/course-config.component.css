@@ -1,0 +1,107 @@
+.ml--2 {
+    margin-left: 2px;
+}
+
+.form-control {
+    padding: 0.275rem 0.75rem !important;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.page-wrapper.toggled .page-content {
+    padding-left: 20px;
+}
+
+.file-field input {
+    display: block;
+    width: 233px !important;
+}
+
+.form-group.input-group select {
+    font-size: 24px;
+    text-align: center;
+    background-color: #689F38 !important;
+    color: #fff;
+}
+
+.file-field input {
+    font-size: 24px !important;
+    height: 36px !important;
+}
+
+.form-group select {
+    text-align: center;
+    border-radius: 4px;
+}
+
+.form-group label {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+.assessments-table-border {
+    box-shadow: 0px 4px 4px 0px #888;
+    border-radius: 5px;
+    border: 1px solid;
+    margin-left: 60px;
+}
+
+.student-table-border {
+    box-shadow: 0px 4px 4px 0px #888;
+    border-radius: 5px;
+    border: 1px solid;
+    margin-left: 16px;
+}
+
+.form-control.form-control-sm.ml-3.w-75.text-center.search-button {
+    /*width: 116px !important;*/
+    padding: 16px 0 !important;
+}
+
+.col-md-12.table-scroling {
+    max-height: calc(100% - 5%);
+    height: calc(100% - 5%);
+    overflow-y: auto;
+    position: relative;
+}
+
+.student-table-scrol {
+    width: 635px;
+    z-index: 999;
+    height: 340px !important;
+}
+
+.text-right-save {
+    margin-left: -2px;
+}
+
+.form-inline {
+    margin-right: -42px;
+}
+
+.import-btn {
+    margin-right: -15px;
+}
+
+.btn-add {
+    margin-left: 18px;
+}
+
+.card-header.text-center.mt-3 {
+    background-color: #10316b;
+    color: #fff;
+}
+
+select {
+    padding: .245rem .75rem !important;
+    border-radius: 4px;
+    color: #333;
+}
+
+/* This affects the locked cell of the pinned bottom row */
+.ag-theme-balham .ag-pinned-left-floating-bottom .ag-cell {
+    border-width: 0px !important;
+}

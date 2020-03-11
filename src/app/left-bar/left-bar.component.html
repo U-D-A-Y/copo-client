@@ -4,8 +4,7 @@
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
         <div class="sidebar-brand text-center">
-            <a href="#dashboard.html">East West University</a>
-            <p>{{role}}</p>
+            <a routerLink="{{role}}/dashboard">East West University</a>
         </div>
         <left-bar-faculty *ngIf="role === 'faculty'"></left-bar-faculty>
         <left-bar-admin *ngIf="role === 'admin'"></left-bar-admin>

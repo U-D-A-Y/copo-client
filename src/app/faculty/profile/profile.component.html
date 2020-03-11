@@ -1,1 +1,60 @@
-<p>profile works!</p>
+<div class="page-wrapper chiller-theme toggled">
+    <!-- sidebar-wrapper  -->
+    <main class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 offset-md-3">
+                    <!-- End Main Row -->
+                    <h3>Edit Profile</h3>
+                    <hr><br>
+
+                    <div class="form-group">
+                        <label for="">Full Name</label>
+                        <div class="input-group mb-3">
+                            <input id="facultyNameInput" type="text" value="<%= user.name %>" class="form-control"
+                                id="basic-url" aria-describedby="basic-addon3" disabled>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="form-group">
+                <label for="">Designation</label>
+                <select class="form-control">
+                  <option selected="">All</option>
+                  <option>Chairperson</option>
+                  <option>Professor</option>
+                  <option>Associate Professor</option>
+                  <option>Assistant Professor</option>
+                  <option>Senior Lecturer</option>
+                  <option>Lecturer</option>
+                  <option>Adjunct Faculty</option>
+                </select>
+              </div> -->
+
+                    <div class="form-group">
+                        <label for="">Previous Password</label>
+                        <div class="input-group mb-3">
+                            <input id="facultyOldPassword" type="password" class="form-control" id="basic-url"
+                                aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="">New Password</label>
+                        <div class="input-group mb-3">
+                            <input id="facultyNewPassword" type="password" class="form-control" id="basic-url"
+                                aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <br>
+
+                    <button id="updateBtn" type="button" class="btn btn-success update-btn">Update</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <!-- page-content" -->
+</div>
+<!-- page-wrapper -->

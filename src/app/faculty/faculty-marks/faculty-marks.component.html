@@ -1,1 +1,115 @@
-<p>faculty-marks works!</p>
+<div class="page-wrapper chiller-theme toggled">
+    <!-- sidebar-wrapper  -->
+    <main class="page-content">
+        <div class="container-fluid">
+            <div class="row mt-1">
+                <div class="col-md-6 col-sm-10">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group text-center">
+
+                                <select class="form-control" id="courseSelector">
+                                    <option selected="" disabled>Course</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group text-center">
+
+                                <select class="form-control" id="sectionSelector">
+                                    <option selected="" disabled>Section</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- end row-->
+            <hr>
+
+            <div class="row ml-st-mrk">
+                <!-- Start First Row -->
+
+                <div class="col-md-7">
+                    <!--Start Left Col -->
+                    <div class="row student-mark-input-table-border">
+                        <div class="col-md-12">
+                            <div class="row mt-3 mb-3">
+                                <!-- Start Assessment drop down & Search Row -->
+                                <!-- Start Course & Section Row -->
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group text-left">
+                                        <!-- <label for="">Course</label> -->
+                                        <select class="form-control" id="assessmentSelector" disabled>
+                                            <option selected="" disabled>Assessments</option>
+                                            <option>Class Test</option>
+                                            <option>Exam Mid I</option>
+                                            <option>Exam Mid II</option>
+                                            <option>Final Exam</option>
+                                            <option>Mini Project</option>
+                                            <option>Lab Exam</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 text-right">
+                                    <button class="btn btn-success mr" type="button" id="saveBtn">Save</button>
+                                </div>
+
+                            </div><!-- End Assessment drop down & Search Row -->
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                </div>
+
+                                <div class="col-md-6 text-right">
+                                    <div class="form-inline md-form form-sm mt-1 src-btn">
+                                        <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
+                                        <input class="form-control form-control-sm ml-3 w-75 text-center search-button"
+                                            type="text" placeholder="Search" aria-label="Search" id="searchField">
+                                    </div>
+                                    <br>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <!-- Start mark input Row -->
+                            <div class="student-table-scrol">
+                                <div class="col-md-12 table-scroling ml-1">
+                                    <div id="studentMarkTable" class="ag-theme-balham" style="height: 100%;">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> <!-- End mark input Row -->
+                    </div>
+
+                </div> <!-- End Left Col -->
+
+                <div class="col-md-5">
+                    <!-- Start Right Col -->
+                    <div class="row student-mark-input-table-border assessment-table-height">
+                        <div class="col-md-12 mb-4">
+                            <!-- Right Col -->
+                            <!-- <h2>Assessments</h2> -->
+                            <br>
+                            <div id="assessmentTable" class="ag-theme-balham">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!-- End Right Col -->
+
+            </div> <!-- End First Row -->
+
+        </div> <!-- Container Fluid End -->
+    </main>
+    <!-- page-content" -->
+</div>
+<!-- page-wrapper -->

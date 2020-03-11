@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { FacultyRoutingModule } from './faculty-routing.module';
 
+import { FacultyComponent } from './faculty.component';
+
 import { FacultyDashboardComponent } from './dashboard/dashboard.component';
 import { FacultyCourseConfigComponent } from './course-config/course-config.component';
 import { FacultyProfileComponent } from './profile/profile.component';
@@ -12,6 +14,7 @@ import { FacultyReportsComponent } from './faculty-reports/faculty-reports.compo
 
 @NgModule({
     declarations: [
+        FacultyComponent,
         FacultyDashboardComponent,
         FacultyCourseConfigComponent, 
         FacultyProfileComponent, 

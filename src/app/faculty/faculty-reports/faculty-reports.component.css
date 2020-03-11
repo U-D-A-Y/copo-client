@@ -1,0 +1,90 @@
+.col-md-5.text-right.ml {
+    margin-left: -4px;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.page-wrapper.toggled .page-content {
+    padding-left: 20px;
+}
+
+.form-group.input-group select {
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+}
+
+.file-field input {
+    font-size: 24px !important;
+    height: 36px !important;
+}
+
+.form-group select {
+    text-align: center;
+    border-radius: 4px;
+}
+
+.form-group label {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+.student-mark-input-table-border {
+    box-shadow: 0px 4px 4px 0px #888;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.col-md-12.table-scroling {
+    max-height: calc(100% - 5%);
+    height: calc(100% - 5%);
+    overflow-y: auto;
+    position: relative;
+}
+
+.student-table-scrol {
+    width: 992px;
+    z-index: 999;
+    height: 330px !important;
+}
+
+.form-control.form-control-sm.ml-3.w-75.text-center.search-button {
+    margin-left: 71px !important;
+    padding: 16px 0;
+}
+
+.preview-btn {
+    margin-right: -3px !important;
+    font-size: 18px;
+}
+
+.total-column-cell {
+    background-color: rgba(250, 235, 215, 0.90);
+}
+
+.total-column-header {
+    background-color: cornsilk;
+}
+
+.co-column-cell {
+    background-color: aliceblue;
+}
+
+.co-column-header {
+    background-color: lavender;
+}
+
+.total-column-cell {
+    background-color: rgb(154, 199, 64);
+}
+
+.co-status-cell {
+    background-color: aquamarine;
+}
+
+.co-status-header {
+    background-color: burlywood;
+}

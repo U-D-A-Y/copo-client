@@ -1,0 +1,18 @@
+.page-wrapper.toggled .page-content {
+    padding-left: 20px;
+}
+
+.form-control {
+    padding: 0.275rem 0.75rem !important;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.form-group.input-group select {
+    font-size: 24px;
+    text-align: center;
+    background-color: #689F38 !important;
+    color: #fff;
+}
