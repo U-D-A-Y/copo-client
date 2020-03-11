@@ -12,11 +12,15 @@ import { LeftBarFacultyComponent } from './left-bar/left-bar-faculty/left-bar-fa
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { FacultyModule } from './faculty/faculty.module';
+import { CourseSectionSelectorComponent } from './course-section-selector/course-section-selector.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        LeftBarComponent, LeftBarAdminComponent, LeftBarFacultyComponent
+        LeftBarComponent,
+        LeftBarAdminComponent,
+        LeftBarFacultyComponent,
+        // CourseSectionSelectorComponent
     ],
     imports: [
         BrowserModule,
@@ -24,9 +28,11 @@ import { FacultyModule } from './faculty/faculty.module';
         AdminModule,
         FacultyModule,
         AppRoutingModule,
-        HttpClientModule,
+        HttpClientModule
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }
