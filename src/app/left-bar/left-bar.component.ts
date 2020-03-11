@@ -25,7 +25,7 @@ export class LeftBarComponent implements OnInit {
         // console.log("url ------", url);
         // this.role = url.split('/')[0];
         // console.log("router----", this.role);
-        this.role = 'admin';
+        this.role = 'faculty';
     }
 
 }
