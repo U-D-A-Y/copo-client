@@ -33,8 +33,13 @@ export class CourseSectionSelectorService {
                     // return courseInformation = result.data;
                     // Add a selcted property
                     let data = result["data"];
-                    for (let course in data) {
-                        data[course]["selected"] = false;
+                    for (let course of data) {
+                        // Add a new property to each course;
+                        course["selected"] = false;
+                        let sections = course["section"];
+                        for (let section of sections) {
+                            section["selected"] = false;
+                        }
                     }
                     this.courseInformation = data    // save it here
                     return data;
@@ -47,14 +52,44 @@ export class CourseSectionSelectorService {
         return this.courseInformation;
     }
 
+    getSelectedCourse() {
+        return this.selectedCourse;
+    }
+
+    getSelectedSection() {
+        return this.selectedSection;
+    }
+
     updateSelectedCourse(code) {
         // console.log(">> ", this.courseInformation);
         for (let course of this.courseInformation) {
             if (course["code"] === code) {
                 course["selected"] = true;
+                this.selectedCourse = code;
             } else {
                 course["selected"] = false;
             }
         }
+    }
+
+    updateSelectedSection(section) {
+        console.log(">> selected course", this.selectedCourse);
+        let sectionsOfSelectedCourse = this.courseInformation.find(
+            course => course["code"] === this.selectedCourse
+        ).section;
+        // console.log(">> sections of selected course", sectionsOfSelectedCourse);
+        let selectedSectionId;
+        for (let sectionObj of sectionsOfSelectedCourse) {
+            if (sectionObj["section"] == section) {
+                sectionObj["selected"] = true;
+                this.selectedSection = section;
+                selectedSectionId = sectionObj["id"];
+            } else {
+                sectionObj["selected"] = false;
+            }
+        }
+        return [this.selectedCourse, this.selectedSection, selectedSectionId];
+
+        console.log("updated section selection", sectionsOfSelectedCourse);
     }
 }

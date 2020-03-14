@@ -1,6 +1,6 @@
 <div class="col-md-4 col-sm-6">
     <div class="form-group text-center">
-        <select #courseSelector class="form-control" id="courseSelector" (change)="courseChanged(courseSelector.value)">
+        <select #courseSelector class="form-control" (change)="courseChanged(courseSelector.value)">
             <option selected="" disabled>Course</option>
             <option *ngFor="let course of courses" [(selected)]="course.selected">
                 {{course.code}}
@@ -10,11 +10,10 @@
 </div>
 <div class="col-md-4 col-sm-6">
     <div class="form-group text-center">
-
-        <select class="form-control" id="sectionSelector" (change)="sectionChanged()">
+        <select #sectionSelector class="form-control" (change)="sectionChanged(sectionSelector.value)">
             <option selected="" disabled>Section</option>
-            <option *ngFor="let section of sections">
-                {{section}}
+            <option *ngFor="let section of sections" [(selected)]="section.selected">
+                {{section.section}}
             </option>
         </select>
     </div>

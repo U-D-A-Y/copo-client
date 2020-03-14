@@ -1,5 +1,6 @@
 import {constants} from './constants';
 import {ActionCellRenderer, SaveCellRenderer} from './renderer';
+import { SelectCellEditor } from 'ag-grid-community';
 // const editors = getCellEditors();
 
 
@@ -455,66 +456,73 @@ export const getCOPO = () => {
 }
 
 
+/**
+ * Faculty column definitions
+ */
+
+
+export const getStudentManagement = () => {
+    let colDefs = [
+        {
+            ...slColumn
+        }, {
+            ...generateColDef('student_id', constants.student_id, {
+                    minWidth: 120,
+                    maxWidth: 150,
+                    editable: false
+                }
+            )
+        }, {
+            ...generateColDef('student_name', constants.student_name, {
+                minWidth: 140
+            })
+        }, {
+            ...generateColDef('enrollment_status', constants.status, {
+                editable: true,
+                singleClickEdit: true,
+                cellEditor: SelectCellEditor,
+                cellEditorParams: {
+                    values: ['AC', 'DR', 'WI', 'IN', 'DE']
+                },
+                cellStyle: function (params) {
+                    let style;
+                    if (params.value === 'AC') {
+                        style = { backgroundColor: 'green' };
+                    } else if (params.value === 'DR') {
+                        style = { backgroundColor: 'red' };
+                    } else if (params.value === 'WI') {
+                        style = { backgroundColor: 'blue' }
+                    } else if (params.value === 'IN') {
+                        style = { backgroundColor: 'purple' }
+                    } else if (params.value === 'DE') {
+                        style = { backgroundColor: 'aliceblue' }
+                    }
+                    style.fontWeight = 'bold';
+                    style.textAlign = 'center';
+                    return style;
+                }
+            })
+        }, {
+            ...saveColumn,
+        },
+        // {
+        //     ...generateColDef('_checked', ' ', {
+        //         minWidth: 30,
+        //         maxWidth: 30,
+        //         editable: true,
+        //     }),
+        //     headerCheckboxSelection: true,
+        //     checkboxSelection: true
+        // }
+    ];
+    colDefs = addOptionToAllColumn(colDefs, {
+        cellStyle: { textAlign: 'center' }
+    }, [constants.status])
+    return colDefs;
+}
+
 // export class ColDefs {
-//     getStudentManagement: () => {
-//         let colDefs = [
-//             {
-//                 ...slColumn
-//             }, {
-//                 ...generateColDef('student_id', constants.student_id,
-//                     {
-//                         minWidth: 120,
-//                         maxWidth: 150,
-//                         editable: false
-//                     })
-//             }, {
-//                 ...generateColDef('student_name', constants.student_name, {
-//                     minWidth: 140
-//                 })
-//             }, {
-//                 ...generateColDef('enrollment_status', constants.status, {
-//                     editable: true,
-//                     singleClickEdit: true,
-//                     cellEditor: 'agSelectCellEditor',
-//                     cellEditorParams: {
-//                         values: ['AC', 'DR', 'WI', 'IN', 'DE']
-//                     },
-//                     cellStyle: function (params) {
-//                         let style;
-//                         if (params.value === 'AC') {
-//                             style = { backgroundColor: 'green' };
-//                         } else if (params.value === 'DR') {
-//                             style = { backgroundColor: 'red' };
-//                         } else if (params.value === 'WI') {
-//                             style = { backgroundColor: 'blue' }
-//                         } else if (params.value === 'IN') {
-//                             style = { backgroundColor: 'purple' }
-//                         } else if (params.value === 'DE') {
-//                             style = { backgroundColor: 'aliceblue' }
-//                         }
-//                         style.fontWeight = 'bold';
-//                         style.textAlign = 'center';
-//                         return style;
-//                     }
-//                 })
-//             }, {
-//                 ...saveColumn,
-//             },
-//             // {
-//             //     ...generateColDef('_checked', ' ', {
-//             //         minWidth: 30,
-//             //         maxWidth: 30,
-//             //         editable: true,
-//             //     }),
-//             //     headerCheckboxSelection: true,
-//             //     checkboxSelection: true
-//             // }
-//         ];
-//         colDefs = addOptionToAllColumn(colDefs, {
-//             cellStyle: { textAlign: 'center' }
-//         }, [constants.status])
-//         return colDefs;
-//     },
+//     
 
 //     getAssessmentCoMapping: () => {
 //         let colDefs = [

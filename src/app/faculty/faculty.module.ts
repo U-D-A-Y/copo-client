@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { FacultyRoutingModule } from './faculty-routing.module';
 
@@ -25,7 +26,8 @@ import { CourseSectionSelectorService } from '../course-section-selector/course-
     ],
     imports: [
         CommonModule,
-        FacultyRoutingModule
+        FacultyRoutingModule,
+        AgGridModule,
     ],
     providers: [
         CourseSectionSelectorService
