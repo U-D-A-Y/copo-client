@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FacultyCourseConfigService } from './course-config.service'
 
 import {  getStudentManagement } from '@common/colDefs';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'faculty-course-config',
@@ -12,12 +11,10 @@ import { Router } from '@angular/router';
     providers: [FacultyCourseConfigService]
 })
 export class FacultyCourseConfigComponent implements OnInit {
-    constructor(private service: FacultyCourseConfigService,
-        private router:Router) { }
+    constructor(private service: FacultyCourseConfigService) { }
 
     ngOnInit(): void {
         this.studentColDefs = getStudentManagement();
-        console.log(this.router.url);
     }
 
     studentColDefs: any;

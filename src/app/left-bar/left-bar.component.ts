@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
+import { switchMap, filter, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-left-bar',
@@ -18,14 +18,16 @@ export class LeftBarComponent implements OnInit {
     role: any;
 
     ngOnInit(): void {
-        // console.log(this.route);
-        // console.log(this.router);
-        // let url = this.router.routerState.snapshot.url;
-        // console.log("state --- ", this.router.routerState);
-        // console.log("url ------", url);
-        // this.role = url.split('/')[0];
-        // console.log("router----", this.role);
-        this.role = 'faculty';
+        // TODO: This works but I don't like this. Try to improve
+        this.router.events.pipe(
+            filter(e => e instanceof NavigationEnd),
+        ).subscribe(res => {
+            // console.log("nav end", res);
+            let url = res["url"];
+            let role = url.split("/")[1];
+            // console.log("role", role);
+            this.role = role;
+        })
     }
 
 }
