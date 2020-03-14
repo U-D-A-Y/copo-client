@@ -1,5 +1,5 @@
 import {constants} from './constants';
-import {ActionCellRenderer, SaveCellRenderer} from './renderer';
+import { ActionCellRenderer, SaveCellRenderer, AssessmentBottomPinRenderer, NumericCellEditor } from './renderer';
 import { SelectCellEditor } from 'ag-grid-community';
 // const editors = getCellEditors();
 
@@ -521,113 +521,119 @@ export const getStudentManagement = () => {
     return colDefs;
 }
 
+
+/** 
+ * Assessment and CO mapping for an offered section;
+*/
+export const getAssessmentCoMapping = () => {
+    let colDefs = [
+        {
+            ...slColumn
+        }, {
+            headerName: "Is DNA?",
+            field: "is_dna",
+            editable: false,
+            cellRenderer: function(params) {
+                var input = document.createElement('input');
+                input.type = "checkbox";
+                input.checked = params.value === 'T'? true : false;
+                input.addEventListener('click', function (event) {
+                    console.log("clicked:", params);
+                    params.value = params.value === 'T'? 'F': 'T';
+                    params.node.data.is_dna = params.value;
+
+                    if (params.value === 'T') {
+                        for (let i=1; i<=4; i++) {
+                            params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = false;
+                        }
+                        params.columnApi.getColumn('total').getColDef().editable = true;
+                    } else {
+                        for (let i=1; i<=4; i++) {
+                            params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = true;
+                        }
+                        params.columnApi.getColumn('total').getColDef().editable = false;
+                    }
+                });
+                return input;
+            }
+        }, {
+            ...generateColDef('assessment', constants.assessment, {
+                minWidth: 100,
+                editable: false
+            }),
+        }, {
+            ...generateColDef('mapping.CO1', constants.co1)
+        }, {
+            ...generateColDef('mapping.CO2', constants.co2)
+        }, {
+            ...generateColDef('mapping.CO3', constants.co3)
+        }, {
+            ...generateColDef('mapping.CO4', constants.co4)
+        }, {
+            headerName: constants.total,
+            field: 'total',
+            editable: false,
+            valueGetter: function (params) {
+                console.log("getter", params);
+                if (params.node.rowPinned) {
+                    return params.data.total;
+                }
+                if (params.data.is_dna === 'T') {
+                    // Total Should simply display value of DNA
+                    // params.columnApi.getColumn("total").getColDef().editable = true;
+                    // for (let i=1; i<=4; i++) {
+                    //     let colName = `mapping.CO${i}`;
+                    //     params.columnApi.getColumn(colName).getColDef().editable = false;
+                    // }
+                    let total = parseFloat(params.data.total || '0');
+                    return total;
+                }
+                let total = 0;
+                for (let key of Object.keys(params.data.mapping)) {
+                    total += Number(params.data.mapping[key]) * 100;    // temporay solution to fix decimal precision error;
+                }
+                // setting value;
+                params.data.total = total / 100;
+
+                return total / 100;
+            },
+            valueSetter: function(params) {
+                console.log("params:", params);
+                if (params.node.rowPinned) {
+                    return params.data.total;
+                }
+                if (params.data.is_dna === 'T') {
+                    // Total Should simply display value of DNA
+                    let total = parseFloat(params.newValue || '0');
+                    params.data.total = total;
+                    return total;
+                }
+            },
+            pinnedRowCellRenderer: AssessmentBottomPinRenderer,
+            pinnedRowCellRendererParams: {
+                style: { 'color': 'blue' }
+            }
+        }, {
+            ...generateColDef('exam_taken_in', constants.exam_taken_in)
+        }, {
+            ...actionColumn,
+        }
+    ];
+    colDefs = addOptionToAllColumn(colDefs, {
+        cellStyle: { textAlign: 'center' }
+    })
+    colDefs = addOptionToAllColumn(colDefs, {
+        // cellEditor: NumericCellEditor('assessment')
+    }, [
+        '#', constants.assessment, constants.total
+    ])
+    return colDefs;
+}
+
 // export class ColDefs {
 //     
 
-//     getAssessmentCoMapping: () => {
-//         let colDefs = [
-//             {
-//                 ...slColumn
-//             }, {
-//                 headerName: "Is DNA?",
-//                 field: "is_dna",
-//                 editable: false,
-//                 cellRenderer: function(params) {
-//                     var input = document.createElement('input');
-//                     input.type = "checkbox";
-//                     input.checked = params.value === 'T'? true : false;
-//                     input.addEventListener('click', function (event) {
-//                         console.log("clicked:", params);
-//                         params.value = params.value === 'T'? 'F': 'T';
-//                         params.node.data.is_dna = params.value;
-
-//                         if (params.value === 'T') {
-//                             for (let i=1; i<=4; i++) {
-//                                 params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = false;
-//                             }
-//                             params.columnApi.getColumn('total').getColDef().editable = true;
-//                         } else {
-//                             for (let i=1; i<=4; i++) {
-//                                 params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = true;
-//                             }
-//                             params.columnApi.getColumn('total').getColDef().editable = false;
-//                         }
-//                     });
-//                     return input;
-//                 }
-//             }, {
-//                 ...generateColDef('assessment', constants.assessment, {
-//                     minWidth: 100,
-//                     editable: false
-//                 }),
-//             }, {
-//                 ...generateColDef('mapping.CO1', constants.co1)
-//             }, {
-//                 ...generateColDef('mapping.CO2', constants.co2)
-//             }, {
-//                 ...generateColDef('mapping.CO3', constants.co3)
-//             }, {
-//                 ...generateColDef('mapping.CO4', constants.co4)
-//             }, {
-//                 headerName: constants.total,
-//                 field: 'total',
-//                 editable: false,
-//                 valueGetter: function (params) {
-//                     console.log("getter", params);
-//                     if (params.node.rowPinned) {
-//                         return params.data.total;
-//                     }
-//                     if (params.data.is_dna === 'T') {
-//                         // Total Should simply display value of DNA
-//                         // params.columnApi.getColumn("total").getColDef().editable = true;
-//                         // for (let i=1; i<=4; i++) {
-//                         //     let colName = `mapping.CO${i}`;
-//                         //     params.columnApi.getColumn(colName).getColDef().editable = false;
-//                         // }
-//                         let total = parseFloat(params.data.total || '0');
-//                         return total;
-//                     }
-//                     let total = 0;
-//                     for (key of Object.keys(params.data.mapping)) {
-//                         total += Number(params.data.mapping[key]) * 100;    // temporay solution to fix decimal precision error;
-//                     }
-//                     // setting value;
-//                     params.data.total = total / 100;
-
-//                     return total / 100;
-//                 },
-//                 valueSetter: function(params) {
-//                     console.log("params:", params);
-//                     if (params.node.rowPinned) {
-//                         return params.data.total;
-//                     }
-//                     if (params.data.is_dna === 'T') {
-//                         // Total Should simply display value of DNA
-//                         let total = parseFloat(params.newValue || '0');
-//                         params.data.total = total;
-//                         return total;
-//                     }
-//                 },
-//                 pinnedRowCellRenderer: renderers.getPinned(),
-//                 pinnedRowCellRendererParams: {
-//                     style: { 'color': 'blue' }
-//                 }
-//             }, {
-//                 ...generateColDef('exam_taken_in', constants.exam_taken_in)
-//             }, {
-//                 ...actionColumn,
-//             }
-//         ];
-//         colDefs = addOptionToAllColumn(colDefs, {
-//             cellStyle: { textAlign: 'center' }
-//         })
-//         colDefs = addOptionToAllColumn(colDefs, {
-//             cellEditor: editors.getNumericCellEditor(target = 'assessment'),
-//         }, [
-//             '#', constants.assessment, constants.total
-//         ])
-//         return colDefs;
-//     },
+//     
 
 //     getStudentMarks: () => {
 //         let colDefs = [

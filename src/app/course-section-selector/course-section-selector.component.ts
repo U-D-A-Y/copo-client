@@ -26,6 +26,10 @@ export class CourseSectionSelectorComponent implements OnInit {
             if (selectedCourse) {
                 this.sections = this.extractSections(selectedCourse);
                 console.log("sections", this.sections);
+                let selectedSection = this.service.getSelectedSection();
+                if (selectedSection) {
+                    this.sectionChanged(selectedSection);
+                }
             }
         })
     }

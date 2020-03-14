@@ -60,9 +60,9 @@ SaveCellRenderer.prototype.getGui = function () {
 };
 
 
-export function AssessmentBottomPin() { }
+export function AssessmentBottomPinRenderer() { }
 
-AssessmentBottomPin.prototype.init = function(params) {
+AssessmentBottomPinRenderer.prototype.init = function(params) {
     this.eGui = document.createElement('div');
     this.eGui.style = 'font-weight: bold; color: olivedrab';
     if (params.value > 100) {
@@ -71,7 +71,7 @@ AssessmentBottomPin.prototype.init = function(params) {
     this.eGui.innerHTML = params.value;
 };
 
-AssessmentBottomPin.prototype.getGui = function() {
+AssessmentBottomPinRenderer.prototype.getGui = function() {
     return this.eGui;
 };
 

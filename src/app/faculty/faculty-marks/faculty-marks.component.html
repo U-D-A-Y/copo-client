@@ -4,24 +4,8 @@
         <div class="container-fluid">
             <div class="row mt-1">
                 <div class="col-md-6 col-sm-10">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="form-group text-center">
-
-                                <select class="form-control" id="courseSelector">
-                                    <option selected="" disabled>Course</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="form-group text-center">
-
-                                <select class="form-control" id="sectionSelector">
-                                    <option selected="" disabled>Section</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    <app-course-section-selector (sectionValueSet)="sectionChanged($event)">
+                    </app-course-section-selector>
                 </div>
 
             </div> <!-- end row-->
@@ -98,9 +82,15 @@
                             <!-- Right Col -->
                             <!-- <h2>Assessments</h2> -->
                             <br>
-                            <div id="assessmentTable" class="ag-theme-balham">
-
-                            </div>
+                            <!-- <div id="assessmentTable" class="ag-theme-balham">
+                            </div> -->
+                            <ag-grid-angular
+                                style="height: 100%;"
+                                [columnDefs]="assessmentColDefs"
+                                [rowData]="assessmentRowData | async"
+                                class="ag-theme-balham"
+                            >
+                            </ag-grid-angular>
 
                         </div>
                     </div>

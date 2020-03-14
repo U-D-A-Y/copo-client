@@ -89,7 +89,5 @@ export class CourseSectionSelectorService {
             }
         }
         return [this.selectedCourse, this.selectedSection, selectedSectionId];
-
-        console.log("updated section selection", sectionsOfSelectedCourse);
     }
 }
