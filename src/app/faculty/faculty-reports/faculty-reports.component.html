@@ -9,32 +9,11 @@
                     <div class="row">
                         <!-- Start Course & Section Row -->
                         <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="form-group text-center">
-                                        <!-- <label for="">Course</label> -->
-                                        <select class="form-control" id="courseSelector">
-                                            <option selected="" disabled>Course</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="form-group text-center">
-                                        <!-- <label for="">Section</label> -->
-                                        <select class="form-control" id="sectionSelector">
-                                            <option selected="" disabled>Section</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-course-section-selector 
+                                (sectionValueSet)="sectionChanged($event)"
+                                class="row">
+                            </app-course-section-selector>
                         </div>
-                        <!-- 
-              <div class="col-md-5">
-                <marquee>
-                  <h5> Thursday, 28 November, 2019 </h5>
-                </marquee>
-              </div> -->
                     </div> <!-- End Course & Section Row -->
                     <hr>
                 </div>

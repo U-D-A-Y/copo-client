@@ -6,7 +6,9 @@
             <div class="row mt-1">
                 <div class="col-md-6 col-sm-10">
                     <!-- Course & Section selector. Turn this into component with service -->
-                    <app-course-section-selector (sectionValueSet)="sectionChanged($event)">
+                    <app-course-section-selector 
+                        (sectionValueSet)="sectionChanged($event)"
+                        class="row">
                     </app-course-section-selector>
                     <!-- <div class="row">
                     </div> -->
