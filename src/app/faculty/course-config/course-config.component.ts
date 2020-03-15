@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { FacultyCourseConfigService } from './course-config.service'
 
-import {  getStudentManagement } from '@common/colDefs';
+import {  getStudentManagement, getAssessmentCoMapping } from '@common/colDefs';
+import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
     selector: 'faculty-course-config',
@@ -13,24 +14,29 @@ import {  getStudentManagement } from '@common/colDefs';
 export class FacultyCourseConfigComponent implements OnInit {
     constructor(private service: FacultyCourseConfigService) { }
 
+    @ViewChild('studentAgGrid') studentAgGrid: AgGridAngular;
+    @ViewChild('assessmentAgGrid') assessmentAgGrid: AgGridAngular;
+
     ngOnInit(): void {
         this.studentColDefs = getStudentManagement();
+        this.assessmentColDefs = getAssessmentCoMapping();
     }
 
     studentColDefs: any;
     studentRowData: any;
 
+    assessmentColDefs: any;
+    assessmentRowData: any;
+
+    ngAfterViewInit(): void {
+        this.studentAgGrid.api.sizeColumnsToFit();
+        this.assessmentAgGrid.api.sizeColumnsToFit();
+    }
+
     sectionChanged(values) {
-        console.log("IN config", values);
-        let code = values["course"];
-        let section = values["section"];
         let sectionId = values["id"];
 
-        // this.service.getStudents(sectionId)
-        // .subscribe(result => {
-        //     console.log(result);
-        //     this.studentRowData = result;
-        // })
         this.studentRowData = this.service.getStudents(sectionId);
+        this.assessmentRowData = this.service.getAssessments(sectionId);
     }
 }

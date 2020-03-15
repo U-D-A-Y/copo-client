@@ -26,4 +26,18 @@ export class FacultyCourseConfigService {
             })
         )
     }
+
+    /**
+     * Get the assessments of a section
+     * @memberof FacultyCourseConfigService
+     */
+    getAssessments = (sectionId) => {
+        const apiUrl = this.proxyPrefix + `/faculty/section/${sectionId}/assessments`;
+        return this.http.get(apiUrl)
+        .pipe(
+            map(result => {
+                return result["data"];
+            })
+        )
+    }
 }
