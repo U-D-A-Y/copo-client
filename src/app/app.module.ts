@@ -12,7 +12,7 @@ import { LeftBarFacultyComponent } from './left-bar/left-bar-faculty/left-bar-fa
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { FacultyModule } from './faculty/faculty.module';
-import { CourseSectionSelectorComponent } from './course-section-selector/course-section-selector.component';
+import { CourseSectionSelectorComponent } from './common/components/course-section-selector/course-section-selector.component';
 
 @NgModule({
     declarations: [
