@@ -1,3 +1,7 @@
+.active {
+    background-color: aliceblue;
+    font-weight: bold;
+}
 
 .svg-inline--fa {
     margin-right: 6px !important;
