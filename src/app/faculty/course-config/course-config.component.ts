@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { FacultyCourseConfigService } from './course-config.service'
 
@@ -6,6 +7,7 @@ import {  getStudentManagement, getAssessmentCoMapping } from '@common/colDefs';
 import { getAgGridAllData } from '@common/util';
 
 import { AgGridAngular } from 'ag-grid-angular';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'faculty-course-config',
@@ -14,7 +16,10 @@ import { AgGridAngular } from 'ag-grid-angular';
     providers: [FacultyCourseConfigService]
 })
 export class FacultyCourseConfigComponent implements OnInit {
-    constructor(private service: FacultyCourseConfigService) { }
+    constructor(
+        private service: FacultyCourseConfigService,
+        private route: ActivatedRoute
+    ) { }
 
     @ViewChild('studentAgGrid') studentAgGrid: AgGridAngular;
     @ViewChild('assessmentAgGrid') assessmentAgGrid: AgGridAngular;
@@ -22,6 +27,13 @@ export class FacultyCourseConfigComponent implements OnInit {
     ngOnInit(): void {
         this.studentColDefs = getStudentManagement();
         this.assessmentColDefs = getAssessmentCoMapping();
+
+        // this.route.paramMap.pipe(
+        //     switchMap((params: ParamMap) => 
+        //         // console.log(params);
+        //         // let x = params.get('code');
+        //     )
+        // )
     }
 
     getAll( ) {

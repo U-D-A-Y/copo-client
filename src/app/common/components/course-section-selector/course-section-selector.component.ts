@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CourseSectionSelectorService } from './course-section-selector.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-course-section-selector',
@@ -7,7 +10,7 @@ import { CourseSectionSelectorService } from './course-section-selector.service'
     styleUrls: ['./course-section-selector.component.css']
 })
 export class CourseSectionSelectorComponent implements OnInit {
-    constructor(private service: CourseSectionSelectorService) { }
+    constructor(private service: CourseSectionSelectorService, private route: ActivatedRoute) { }
 
     @Output() sectionValueSet = new EventEmitter();
     
@@ -32,6 +35,11 @@ export class CourseSectionSelectorComponent implements OnInit {
                 }
             }
         })
+
+        let courseCodeFromRoute = this.route.snapshot.paramMap.get('code');
+        if (courseCodeFromRoute) {
+            this.courseChanged(courseCodeFromRoute);
+        }
     }
 
     // Extract the Courses array

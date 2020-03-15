@@ -23,86 +23,27 @@
 
             <div class="row">
                 <!-- Start Card Row -->
-                <div class="card-border mr-1">
+                <div class="card-border mr-1" *ngFor="let info of sectionInformation | async">
                     <div class="col-md-3">
                         <div class="card border-0" style="width: 14rem; height: 450px;">
                             <img src="../assets/img/algo.png" style="width: 220px; height: 140px;"
                                 class="card-img-top mt-3" alt="...">
                             <div class="card-body">
-                                <h2 class="card-title text-center course-code">CSE 245</h2>
+                                <h2 class="card-title text-center course-code">{{info.code}}</h2>
                                 <hr>
-                                <h3 class="card-text text-center course-name">Algorithms</h3>
+                                <h3 class="card-text text-center course-name">{{info.course_name}}</h3>
                                 <hr>
-                                <h4 class="card-text text-center section-list">2</h4>
+                                <h4 class="card-text text-center section-list">{{info.section.join(", ")}}</h4>
                             </div>
                             <div class="card-btn my-3">
-                                <a href="course_configuration.html" target="_blank" class="btn btn-warning">Config</a>
+                                <a [routerLink]="['/faculty/configcourse', {'code':info.code}]" class="btn btn-warning">Config</a>
                                 <a href="course_configuration.html" target="_blank" class="btn btn-info">View</a>
                             </div>
                         </div>
                     </div>
-                </div> <!-- End Card Border -->
-                <div class="card-border mr-1">
-                    <div class="col-md-3">
-                        <div class="card border-0" style="width: 14rem; height: 450px;">
-                            <img src="../assets/img/oop.jpg" style="width: 220px; height: 140px;"
-                                class="card-img-top mt-3" alt="...">
-                            <div class="card-body">
-                                <h2 class="card-title text-center course-code">CSE 420</h2>
-                                <hr>
-                                <h3 class="card-text text-center course-name">Computer Graphics</h3>
-                                <hr>
-                                <h4 class="card-text text-center section-list">2</h4>
-                            </div>
-                            <div class="card-btn my-3">
-                                <a href="course_configuration.html" target="_blank" class="btn btn-warning">Config</a>
-                                <a href="course_configuration.html" target="_blank" class="btn btn-info">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- End Card Border -->
-                <div class="card-border mr-1" style="display: none;">
-                    <div class="col-md-3">
-                        <div class="card border-0" style="width: 14rem; height: 450px;">
-                            <img src="../assets/img/ai.jpg" style="width: 220px; height: 140px;"
-                                class="card-img-top mt-3" alt="...">
-                            <div class="card-body">
-                                <h2 class="card-title text-center course-code">CSE 420</h2>
-                                <hr>
-                                <h3 class="card-text text-center course-name">Computer Graphics</h3>
-                                <hr>
-                                <h4 class="card-text text-center section-list">2</h4>
-                            </div>
-                            <div class="card-btn my-3">
-                                <a href="course_configuration.html" target="_blank" class="btn btn-warning">Config</a>
-                                <a href="course_configuration.html" target="_blank" class="btn btn-info">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- End Card Border -->
-                <div class="card-border" style="display: none;">
-                    <div class="col-md-3">
-                        <div class="card border-0" style="width: 14rem; height: 450px;">
-                            <img src="../assets/img/cg.jpg" style="width: 220px; height: 140px;"
-                                class="card-img-top mt-3" alt="...">
-                            <div class="card-body">
-                                <h2 class="card-title text-center course-code">CSE 420</h2>
-                                <hr>
-                                <h3 class="card-text text-center course-name">Computer Graphics</h3>
-                                <hr>
-                                <h4 class="card-text text-center section-list">2</h4>
-                            </div>
-                            <div class="card-btn my-3">
-                                <a href="course_configuration.html" target="_blank" class="btn btn-warning">Config</a>
-                                <a href="course_configuration.html" target="_blank" class="btn btn-info">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- End Card Border -->
+                </div>
             </div> <!-- End Card ROw -->
-
         </div>
-
     </main>
     <!-- page-content" -->
 </div>
