@@ -482,24 +482,52 @@ export const getStudentManagement = () => {
                 singleClickEdit: true,
                 cellEditor: SelectCellEditor,
                 cellEditorParams: {
-                    values: ['AC', 'DR', 'WI', 'IN', 'DE']
+                    // values: ['AC', 'DR', 'WI', 'IN', 'DE']
+                    values: ['Active', 'Drop', 'Witheld', 'Incomplete', 'Defaulter']
                 },
                 cellStyle: function (params) {
-                    let style;
-                    if (params.value === 'AC') {
+                    // console.log("style", params);
+                    let style = {};
+                    let value = params.data.enrollment_status;
+                    if (value === 'AC') {
                         style = { backgroundColor: 'green' };
-                    } else if (params.value === 'DR') {
+                    } else if (value === 'DR') {
                         style = { backgroundColor: 'red' };
-                    } else if (params.value === 'WI') {
+                    } else if (value === 'WI') {
                         style = { backgroundColor: 'blue' }
-                    } else if (params.value === 'IN') {
+                    } else if (value === 'IN') {
                         style = { backgroundColor: 'purple' }
-                    } else if (params.value === 'DE') {
+                    } else if (value === 'DE') {
                         style = { backgroundColor: 'aliceblue' }
                     }
-                    style.fontWeight = 'bold';
-                    style.textAlign = 'center';
+                    style["fontWeight"] = 'bold';
+                    style["textAlign"] = 'center';
                     return style;
+                },
+                valueSetter: function(params) {
+                    let showToStoreMap = {
+                        'Active': 'AC', 
+                        'Drop': 'DR', 
+                        'Witheld': 'WI', 
+                        'Incomplete': 'IN', 
+                        'Defaulter': 'DE'
+                    }
+                    let valueToSet = showToStoreMap[params.newValue];
+                    // console.log("val-setter", params.newValue);
+                    params.data.enrollment_status = valueToSet;
+                    return valueToSet;
+                },
+                valueGetter: function(params) {
+                    let storeToShowMap = {
+                        'AC': 'Active', 
+                        'DR': 'Drop', 
+                        'WI': 'Witheld', 
+                        'IN': 'Incomplete', 
+                        'DE': 'Defaulter'
+                    }
+                    // console.log('val-getter', params);
+                    let actualValue = params.data.enrollment_status;
+                    return storeToShowMap[actualValue];
                 }
             })
         }, {
@@ -574,7 +602,7 @@ export const getAssessmentCoMapping = () => {
             field: 'total',
             editable: false,
             valueGetter: function (params) {
-                console.log("getter", params);
+                // console.log("getter", params);
                 if (params.node.rowPinned) {
                     return params.data.total;
                 }

@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FacultyCourseConfigService } from './course-config.service'
 
 import {  getStudentManagement, getAssessmentCoMapping } from '@common/colDefs';
+import { getAgGridAllData } from '@common/util';
+
 import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
@@ -20,6 +22,11 @@ export class FacultyCourseConfigComponent implements OnInit {
     ngOnInit(): void {
         this.studentColDefs = getStudentManagement();
         this.assessmentColDefs = getAssessmentCoMapping();
+    }
+
+    getAll( ) {
+        let data = getAgGridAllData(this.studentAgGrid);
+        console.log("all data", data)
     }
 
     studentColDefs: any;
