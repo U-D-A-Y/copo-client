@@ -14,6 +14,9 @@ import { FacultyReportsComponent } from './faculty-reports/faculty-reports.compo
 
 import { CourseSectionSelectorComponent } from '../course-section-selector/course-section-selector.component';
 import { CourseSectionSelectorService } from '../course-section-selector/course-section-selector.service';
+
+import { SemesterSelectorComponent } from '../semester-selector/semester-selector.component';
+import { SemesterSelectorService } from '../semester-selector/semester-selector.service';
 @NgModule({
     declarations: [
         FacultyComponent,
@@ -23,6 +26,7 @@ import { CourseSectionSelectorService } from '../course-section-selector/course-
         FacultyMarksComponent, 
         FacultyReportsComponent,
         CourseSectionSelectorComponent,
+        SemesterSelectorComponent,
     ],
     imports: [
         CommonModule,
@@ -30,7 +34,8 @@ import { CourseSectionSelectorService } from '../course-section-selector/course-
         AgGridModule,
     ],
     providers: [
-        CourseSectionSelectorService
+        CourseSectionSelectorService,
+        SemesterSelectorService,
     ]
 })
 export class FacultyModule { }
