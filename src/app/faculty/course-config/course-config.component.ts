@@ -3,11 +3,12 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { FacultyCourseConfigService } from './course-config.service'
 
-import {  getStudentManagement, getAssessmentCoMapping } from '@common/colDefs';
+import {  getStudentManagement, getAssessmentCoMapping, getAssessmentChooserColDef } from '@common/colDefs';
 import { getAgGridAllData } from '@common/util';
 
 import { AgGridAngular } from 'ag-grid-angular';
 import { switchMap } from 'rxjs/operators';
+import { RowDataTransaction } from 'ag-grid-community';
 
 @Component({
     selector: 'faculty-course-config',
@@ -23,21 +24,19 @@ export class FacultyCourseConfigComponent implements OnInit {
 
     @ViewChild('studentAgGrid') studentAgGrid: AgGridAngular;
     @ViewChild('assessmentAgGrid') assessmentAgGrid: AgGridAngular;
+    @ViewChild('allAssessmentsAgGrid') allAssessmentAgGrid: AgGridAngular;
 
     ngOnInit(): void {
         this.studentColDefs = getStudentManagement();
         this.assessmentColDefs = getAssessmentCoMapping();
+        this.allAssessmentsColDefs = getAssessmentChooserColDef();
 
-        // this.route.paramMap.pipe(
-        //     switchMap((params: ParamMap) => 
-        //         // console.log(params);
-        //         // let x = params.get('code');
-        //     )
-        // )
+        this.allAssessments = this.service.getAllAssessments();
+        this.allAssessmentsRowData = this.service.getAllAssessments();
     }
 
-    getAll( ) {
-        let data = getAgGridAllData(this.studentAgGrid);
+    getAllAgGridData( ) {
+        let data = getAgGridAllData(this.allAssessmentAgGrid);
         console.log("all data", data)
     }
 
@@ -47,9 +46,15 @@ export class FacultyCourseConfigComponent implements OnInit {
     assessmentColDefs: any;
     assessmentRowData: any;
 
+    allAssessmentsColDefs: any;
+    allAssessmentsRowData: any;
+
+    allAssessments: any;
+
     ngAfterViewInit(): void {
         this.studentAgGrid.api.sizeColumnsToFit();
         this.assessmentAgGrid.api.sizeColumnsToFit();
+        // this.allAssessmentAgGrid.api.sizeColumnsToFit();
     }
 
     sectionChanged(values) {
@@ -57,5 +62,19 @@ export class FacultyCourseConfigComponent implements OnInit {
 
         this.studentRowData = this.service.getStudents(sectionId);
         this.assessmentRowData = this.service.getAssessments(sectionId);
+    }
+
+    addAssessmentsToSection = () => {
+        // let data = getAgGridAllData(this.allAssessmentAgGrid);
+        // console.log("all data", data);
+
+        let selectedRowData = this.allAssessmentAgGrid.api.getSelectedRows();
+        console.log("selected", selectedRowData);
+
+        let transaction: RowDataTransaction = {
+            add: selectedRowData
+        }
+
+        this.assessmentAgGrid.api.updateRowData(transaction);
     }
 }

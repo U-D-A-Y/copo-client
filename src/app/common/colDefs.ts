@@ -1,6 +1,7 @@
 import {constants} from './constants';
 import { ActionCellRenderer, SaveCellRenderer, AssessmentBottomPinRenderer, NumericCellEditor } from './renderer';
 import { SelectCellEditor } from 'ag-grid-community';
+import { CheckBoxCellEditor } from '@common/grid-components/checkbox-editor/checkbox-editor.component';
 // const editors = getCellEditors();
 
 
@@ -421,6 +422,7 @@ export const getCourseAndStudentPoReport = () => {
     return colDefs;
 }
 
+
 export const getCOPO = () => {
     let poCols = (() => {
         let cols = [];
@@ -461,6 +463,29 @@ export const getCOPO = () => {
  */
 
 
+/**
+ * Column Definitions for the Grid to add assessments to section
+ */
+export const getAssessmentChooserColDef = () => {
+    let colDefs = [
+        {
+            ...generateColDef('assessment', constants.assessment, {
+                checkboxSelection: true,
+                headerCheckboxSelection: true
+            })
+        }, {
+            ...generateColDef('dna', 'DNA?', {
+                cellRendererFramework: CheckBoxCellEditor,
+                maxWidth: 60,
+                cellStyle: {
+                    textAlign: 'center'
+                }
+            })
+        }
+    ]
+    return colDefs;
+}
+
 export const getStudentManagement = () => {
     let colDefs = [
         {
@@ -480,6 +505,7 @@ export const getStudentManagement = () => {
             ...generateColDef('enrollment_status', constants.status, {
                 editable: true,
                 singleClickEdit: true,
+                maxWidth: 90,
                 cellEditor: SelectCellEditor,
                 cellEditorParams: {
                     // values: ['AC', 'DR', 'WI', 'IN', 'DE']

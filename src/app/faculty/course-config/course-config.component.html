@@ -17,7 +17,8 @@
                             <div class="row">
                                 <div class="col-md-5 text-right col-sm-6">
                                     <!-- <h2>Import</h2> -->
-                                    <button class="btn btn-success import-btn" id="importBtn" (click)="getAll()">Import</button>
+                                    <button class="btn btn-success import-btn" id="importBtn"
+                                        (click)="getAllAgGridData()">Import</button>
                                     <input type="file" id="fileInput" style="display: none;" />
                                 </div>
                                 <div class="col-md-3 text-right col-sm-6">
@@ -110,19 +111,19 @@
                                         </div>
                                         <div class="modal-body">
                                             <form>
-                                                <div class="form-group text-left mt-4">
-                                                    <label for="exampleInputEmail1">Assessments Name</label>
-                                                    <!-- <label for="">Section</label> -->
-                                                    <select class="form-control" id="defaultAllAssessmentSelector">
-                                                        <option selected="">Assessments</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
+                                                <div style="height: 200px;">
+                                                    <!-- TODO: Move to component -->
+                                                    <ag-grid-angular
+                                                        #allAssessmentsAgGrid
+                                                        [rowSelection]="'multiple'"
+                                                        [suppressRowClickSelection]="true"
+                                                        class="ag-theme-balham" style="height: 100%;"
+                                                        [columnDefs]="allAssessmentsColDefs"
+                                                        [rowData]="allAssessmentsRowData | async">
+                                                    </ag-grid-angular>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-success mt-3"
+                                                    <button (click)="addAssessmentsToSection()" type="button" class="btn btn-success mt-3"
                                                         id="addAssessmentBtn">Add</button>
                                                     <button type="button" class="btn btn-danger mt-3 ml-2"
                                                         data-dismiss="modal">Close</button>

@@ -40,4 +40,14 @@ export class FacultyCourseConfigService {
             })
         )
     }
+
+    getAllAssessments = () => {
+        let apiUrl = this.proxyPrefix + '/faculty/assessments';
+        return this.http.get(apiUrl)
+        .pipe(
+            map(result => {
+                return result["data"];
+            })
+        )
+    }
 }

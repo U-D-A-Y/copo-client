@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { SharedModule } from '@common/shared.module';
+import { GridModule } from '@common/grid-components/grid.module';
 
 import { FacultyRoutingModule } from './faculty-routing.module';
 
@@ -13,6 +14,7 @@ import { FacultyCourseConfigComponent } from './course-config/course-config.comp
 import { FacultyProfileComponent } from './profile/profile.component';
 import { FacultyMarksComponent } from './faculty-marks/faculty-marks.component';
 import { FacultyReportsComponent } from './faculty-reports/faculty-reports.component';
+import { from } from 'rxjs';
 @NgModule({
     declarations: [
         FacultyComponent,
@@ -26,7 +28,8 @@ import { FacultyReportsComponent } from './faculty-reports/faculty-reports.compo
         CommonModule,
         FacultyRoutingModule,
         AgGridModule,
-        SharedModule
+        SharedModule,
+        GridModule
     ],
     providers: [
     ]
