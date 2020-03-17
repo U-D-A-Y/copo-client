@@ -7,7 +7,7 @@ import {  getStudentManagement, getAssessmentCoMapping, getAssessmentChooserColD
 import { getAgGridAllData } from '@common/util';
 
 import { AgGridAngular } from 'ag-grid-angular';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, filter, map } from 'rxjs/operators';
 import { RowDataTransaction } from 'ag-grid-community';
 
 @Component({
@@ -32,7 +32,6 @@ export class FacultyCourseConfigComponent implements OnInit {
         this.allAssessmentsColDefs = getAssessmentChooserColDef();
 
         this.allAssessments = this.service.getAllAssessments();
-        this.allAssessmentsRowData = this.service.getAllAssessments();
     }
 
     getAllAgGridData( ) {
@@ -54,7 +53,6 @@ export class FacultyCourseConfigComponent implements OnInit {
     ngAfterViewInit(): void {
         this.studentAgGrid.api.sizeColumnsToFit();
         this.assessmentAgGrid.api.sizeColumnsToFit();
-        // this.allAssessmentAgGrid.api.sizeColumnsToFit();
     }
 
     sectionChanged(values) {
@@ -64,10 +62,25 @@ export class FacultyCourseConfigComponent implements OnInit {
         this.assessmentRowData = this.service.getAssessments(sectionId);
     }
 
-    addAssessmentsToSection = () => {
-        // let data = getAgGridAllData(this.allAssessmentAgGrid);
-        // console.log("all data", data);
+    populateModalAssessments() {
+        // Get already added assessments from Co/Po mapping grid
+        let existingAssessmentData = getAgGridAllData(this.assessmentAgGrid);
+        this.allAssessmentsRowData = this.service.getAllAssessments()
+        .pipe(
+            map(result => {
+                let filteredData = result.filter(item => {
+                    let found = existingAssessmentData.find(row => row["assessment"] === item["assessment"]);
+                    if (!found) {
+                        return true;
+                    }
+                })
+                return filteredData;
+            })
+        )
+        this.allAssessmentAgGrid.api.sizeColumnsToFit();
+    }
 
+    addAssessmentsToSection = () => {
         let selectedRowData = this.allAssessmentAgGrid.api.getSelectedRows();
         console.log("selected", selectedRowData);
 
