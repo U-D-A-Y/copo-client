@@ -1,5 +1,6 @@
 import { ICellEditorAngularComp, AgEditorComponent, AgRendererComponent } from 'ag-grid-angular';
 import { Component } from '@angular/core';
+import { ICellRendererParams } from 'ag-grid-community';
 
 /**
  * CheckBox cell editor
@@ -10,31 +11,16 @@ import { Component } from '@angular/core';
 export class CheckBoxCellEditor implements AgRendererComponent {
     public params: any;
 
-    agInit(params) {
+    agInit(params: ICellRendererParams) {
+        // setValue triggers valueSetter on colDefs
+        // params.setValue(false);
+        console.log("chk params", params);
         this.params = params;
-        this.params.value = false;
-        // eGui.checked = params.value === 'T'? true : false;
-        // eGui.addEventListener('click', function (event) {
-        //     console.log("clicked:", params);
-        //     params.value = params.value === 'T'? 'F': 'T';
-        //     params.node.data.is_dna = params.value;
-
-        //     if (params.value === 'T') {
-        //         for (let i=1; i<=4; i++) {
-        //             params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = false;
-        //         }
-        //         params.columnApi.getColumn('total').getColDef().editable = true;
-        //     } else {
-        //         for (let i=1; i<=4; i++) {
-        //             params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = true;
-        //         }
-        //         params.columnApi.getColumn('total').getColDef().editable = false;
-        //     }
-        // });
+        // this.params.value = params.value || false;  // default is false
     }
 
     refresh(params: any): boolean {
-        // params.data.amount++;
+        console.log("Refresh");
         params.data.cbox = params.value
         // console.log(params.value);
         params.api.refreshCells(params);
@@ -42,6 +28,10 @@ export class CheckBoxCellEditor implements AgRendererComponent {
     }
 
     getValue() {
-        return false;
+        console.log("Get Value");
+        let val = this.params.value;
+        this.params.data.cbox = val;
+        this.params.setValue(val);
+        return val;
     }
 }

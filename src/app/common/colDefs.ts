@@ -587,28 +587,46 @@ export const getAssessmentCoMapping = () => {
             headerName: "Is DNA?",
             field: "is_dna",
             editable: false,
-            cellRenderer: function(params) {
-                var input = document.createElement('input');
-                input.type = "checkbox";
-                input.checked = params.value === 'T'? true : false;
-                input.addEventListener('click', function (event) {
-                    console.log("clicked:", params);
-                    params.value = params.value === 'T'? 'F': 'T';
-                    params.node.data.is_dna = params.value;
+            cellRendererFramework: CheckBoxCellEditor,
+            // cellEditorFramework: CheckBoxCellEditor,
+            // cellRenderer: function(params) {
+            //     input.addEventListener('click', function (event) {
+            //         console.log("clicked:", params);
+            //         params.value = params.value === 'T'? 'F': 'T';
+            //         params.node.data.is_dna = params.value;
 
-                    if (params.value === 'T') {
-                        for (let i=1; i<=4; i++) {
-                            params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = false;
-                        }
-                        params.columnApi.getColumn('total').getColDef().editable = true;
-                    } else {
-                        for (let i=1; i<=4; i++) {
-                            params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = true;
-                        }
-                        params.columnApi.getColumn('total').getColDef().editable = false;
-                    }
-                });
-                return input;
+            //         if (params.value === 'T') {
+            //             for (let i=1; i<=4; i++) {
+            //                 params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = false;
+            //             }
+            //             params.columnApi.getColumn('total').getColDef().editable = true;
+            //         } else {
+            //             for (let i=1; i<=4; i++) {
+            //                 params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = true;
+            //             }
+            //             params.columnApi.getColumn('total').getColDef().editable = false;
+            //         }
+            //     });
+            //     return input;
+            // }
+            valueGetter: function(params) {
+                console.log("getter", params.data.assessment, params.data.is_dna);
+                if (params.data.is_dna === 'T') {
+                    // Cell Renderer will get this value
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            valueSetter: function(params) {
+                console.log("setter", params.data.assessment, params.newValue);
+                let newValue = params.newValue;
+                if (newValue) {
+                    params.data.is_dna = 'T';
+                } else {
+                    params.data.is_dna = 'F';
+                }
+                return true;
             }
         }, {
             ...generateColDef('assessment', constants.assessment, {

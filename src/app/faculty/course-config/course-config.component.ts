@@ -81,6 +81,8 @@ export class FacultyCourseConfigComponent implements OnInit {
     }
 
     addAssessmentsToSection = () => {
+        let all = getAgGridAllData(this.allAssessmentAgGrid);
+        console.log("all data", all);
         let selectedRowData = this.allAssessmentAgGrid.api.getSelectedRows();
         console.log("selected", selectedRowData);
 
@@ -89,5 +91,10 @@ export class FacultyCourseConfigComponent implements OnInit {
         }
 
         this.assessmentAgGrid.api.updateRowData(transaction);
+    }
+
+    saveAssessments() {
+        let all = getAgGridAllData(this.assessmentAgGrid);
+        console.log("as all", all);
     }
 }
