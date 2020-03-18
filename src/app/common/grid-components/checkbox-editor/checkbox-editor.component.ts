@@ -14,14 +14,14 @@ export class CheckBoxCellEditor implements AgRendererComponent {
     agInit(params: ICellRendererParams) {
         // setValue triggers valueSetter on colDefs
         // params.setValue(false);
-        console.log("chk params", params);
+        // console.log("chk params", params);
         this.params = params;
         // this.params.value = params.value || false;  // default is false
     }
 
     refresh(params: any): boolean {
         console.log("Refresh");
-        params.data.cbox = params.value
+        params.data.cbox = params.value;
         // console.log(params.value);
         params.api.refreshCells(params);
         return false;

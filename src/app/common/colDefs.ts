@@ -580,37 +580,31 @@ export const getStudentManagement = () => {
  * Assessment and CO mapping for an offered section;
 */
 export const getAssessmentCoMapping = () => {
+    let coMappingColumns = [];
+    for (let i=1; i<=4; i++) {
+        let col = generateColDef(`mapping.CO${i}`, constants[`co${i}`], {
+            editable: function(params) {
+                // console.log("editable", params);
+                if (params.data.is_dna === "T") {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        });
+        coMappingColumns.push(col);
+    }
     let colDefs = [
         {
             ...slColumn
         }, {
-            headerName: "Is DNA?",
+            headerName: "DNA?",
             field: "is_dna",
             editable: false,
             cellRendererFramework: CheckBoxCellEditor,
-            // cellEditorFramework: CheckBoxCellEditor,
-            // cellRenderer: function(params) {
-            //     input.addEventListener('click', function (event) {
-            //         console.log("clicked:", params);
-            //         params.value = params.value === 'T'? 'F': 'T';
-            //         params.node.data.is_dna = params.value;
-
-            //         if (params.value === 'T') {
-            //             for (let i=1; i<=4; i++) {
-            //                 params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = false;
-            //             }
-            //             params.columnApi.getColumn('total').getColDef().editable = true;
-            //         } else {
-            //             for (let i=1; i<=4; i++) {
-            //                 params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = true;
-            //             }
-            //             params.columnApi.getColumn('total').getColDef().editable = false;
-            //         }
-            //     });
-            //     return input;
-            // }
+            // params.columnApi.getColumn(`mapping.CO${i}`).getColDef().editable = true;
             valueGetter: function(params) {
-                console.log("getter", params.data.assessment, params.data.is_dna);
+                // console.log("getter", params.data.assessment, params.data.is_dna);
                 if (params.data.is_dna === 'T') {
                     // Cell Renderer will get this value
                     return true;
@@ -619,7 +613,7 @@ export const getAssessmentCoMapping = () => {
                 }
             },
             valueSetter: function(params) {
-                console.log("setter", params.data.assessment, params.newValue);
+                // console.log("setter", params.data.assessment, params.newValue);
                 let newValue = params.newValue;
                 if (newValue) {
                     params.data.is_dna = 'T';
@@ -633,18 +627,19 @@ export const getAssessmentCoMapping = () => {
                 minWidth: 100,
                 editable: false
             }),
-        }, {
-            ...generateColDef('mapping.CO1', constants.co1)
-        }, {
-            ...generateColDef('mapping.CO2', constants.co2)
-        }, {
-            ...generateColDef('mapping.CO3', constants.co3)
-        }, {
-            ...generateColDef('mapping.CO4', constants.co4)
-        }, {
+        }, 
+            ...coMappingColumns,
+        {
             headerName: constants.total,
             field: 'total',
-            editable: false,
+            editable: function(params) {
+                // console.log("editable", params);
+                if (params.data.is_dna === "T") {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
             valueGetter: function (params) {
                 // console.log("getter", params);
                 if (params.node.rowPinned) {

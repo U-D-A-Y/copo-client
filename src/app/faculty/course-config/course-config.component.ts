@@ -81,10 +81,22 @@ export class FacultyCourseConfigComponent implements OnInit {
     }
 
     addAssessmentsToSection = () => {
-        let all = getAgGridAllData(this.allAssessmentAgGrid);
-        console.log("all data", all);
+        // let all = getAgGridAllData(this.allAssessmentAgGrid);
+        // console.log("all data", all);
         let selectedRowData = this.allAssessmentAgGrid.api.getSelectedRows();
-        console.log("selected", selectedRowData);
+        // console.log("selected", selectedRowData);
+        
+        // transform the rows so it matches the assessment configuration
+        selectedRowData = selectedRowData.map(row => {
+            let dna = 'F';
+            if (row["cbox"]) dna = 'T';
+            return {
+                'assessment': row["assessment"],
+                'is_dna': dna,
+                'mapping': row['mapping']
+            }
+        })
+        // console.log("selected", selectedRowData);
 
         let transaction: RowDataTransaction = {
             add: selectedRowData
