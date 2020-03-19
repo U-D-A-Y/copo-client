@@ -1,7 +1,8 @@
 import {constants} from './constants';
-import { ActionCellRenderer, SaveCellRenderer, AssessmentBottomPinRenderer, NumericCellEditor } from './renderer';
+import { ActionCellRenderer, SaveCellRenderer, AssessmentBottomPinRenderer } from './renderer';
 import { SelectCellEditor } from 'ag-grid-community';
 import { CheckBoxCellEditor } from '@common/grid-components/checkbox-editor/checkbox-editor.component';
+import { NumericCellEditor } from '@common/grid-components/numeric-cell-editor/numeric-cell-editor.component';
 // const editors = getCellEditors();
 
 
@@ -646,12 +647,6 @@ export const getAssessmentCoMapping = () => {
                     return params.data.total;
                 }
                 if (params.data.is_dna === 'T') {
-                    // Total Should simply display value of DNA
-                    // params.columnApi.getColumn("total").getColDef().editable = true;
-                    // for (let i=1; i<=4; i++) {
-                    //     let colName = `mapping.CO${i}`;
-                    //     params.columnApi.getColumn(colName).getColDef().editable = false;
-                    // }
                     let total = parseFloat(params.data.total || '0');
                     return total;
                 }
@@ -690,7 +685,10 @@ export const getAssessmentCoMapping = () => {
         cellStyle: { textAlign: 'center' }
     })
     colDefs = addOptionToAllColumn(colDefs, {
-        // cellEditor: NumericCellEditor('assessment')
+        cellEditorFramework: NumericCellEditor,
+        cellEditorParams: {
+            target: 'assessment'
+        }
     }, [
         '#', constants.assessment, constants.total
     ])
