@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { FacultyCourseConfigService } from './course-config.service'
 
-import {  getStudentManagement, getAssessmentCoMapping, getAssessmentChooserColDef } from '@common/colDefs';
+import { getStudentManagement, getAssessmentCoMapping, getAssessmentChooserColDef } from '@common/colDefs';
 import { getAgGridAllData } from '@common/util';
 
 import { AgGridAngular } from 'ag-grid-angular';

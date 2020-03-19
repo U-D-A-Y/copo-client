@@ -695,64 +695,72 @@ export const getAssessmentCoMapping = () => {
     return colDefs;
 }
 
+/**
+ * Ag grid column definitions for showing student marks
+ */
+export const getStudentMarks = () => {
+    let colDefs = [
+        {
+            ...slColumn
+        }, {
+            ...generateColDef('student_id', constants.student_id, {
+                editable: false,
+                minWidth: 110
+            })
+        }, {
+            ...generateColDef('student_name', constants.student_name, {
+                editable: false,
+                minWidth: 150
+            })
+        }, {
+            ...generateColDef('marks.CO1', constants.co1)
+        }, {
+            ...generateColDef('marks.CO2', constants.co2)
+        }, {
+            ...generateColDef('marks.CO3', constants.co3)
+        }, {
+            ...generateColDef('marks.CO4', constants.co4)
+        }, {
+            headerName: constants.total,
+            field: 'total',
+            valueGetter: function (params) {
+                if (params.colDef.editable) {
+                    // DNA
+                    params.data.total = params.data.total;
+                    return params.data.total;
+                }
+                let total = 0;
+                let allMarks = params.data.marks;
+                for (let key of Object.keys(allMarks)) {
+                    total += Number(allMarks[key]);
+                }
+                params.data.total = total;
+                return total;
+            },
+            editable: false
+        }
+    ];
+    colDefs = addOptionToAllColumn(colDefs, {
+        cellStyle: { textAlign: 'center' }
+    });
+    colDefs = addOptionToSomeColumn(colDefs, {
+        minWidth: 40,
+        cellEditorFramework: NumericCellEditor,
+        cellEditorParams: {
+            target: 'mark'
+        }
+    }, [
+        constants.co1, constants.co2, constants.co3, constants.co4, constants.total
+    ])
+    return colDefs;
+}
+
 // export class ColDefs {
 //     
 
 //     
 
-//     getStudentMarks: () => {
-//         let colDefs = [
-//             {
-//                 ...slColumn
-//             }, {
-//                 ...generateColDef('student_id', constants.student_id, {
-//                     editable: false,
-//                     minWidth: 110
-//                 })
-//             }, {
-//                 ...generateColDef('student_name', constants.student_name, {
-//                     editable: false,
-//                     minWidth: 150
-//                 })
-//             }, {
-//                 ...generateColDef('marks.CO1', constants.co1)
-//             }, {
-//                 ...generateColDef('marks.CO2', constants.co2)
-//             }, {
-//                 ...generateColDef('marks.CO3', constants.co3)
-//             }, {
-//                 ...generateColDef('marks.CO4', constants.co4)
-//             }, {
-//                 headerName: constants.total,
-//                 field: 'total',
-//                 valueGetter: function (params) {
-//                     if (params.colDef.editable) {
-//                         // DNA
-//                         params.data.total = params.data.total;
-//                         return params.data.total;
-//                     }
-//                     let total = 0;
-//                     let allMarks = params.data.marks;
-//                     for (key of Object.keys(allMarks)) {
-//                         total += Number(allMarks[key]);
-//                     }
-//                     params.data.total = total;
-//                     return total;
-//                 },
-//                 editable: false
-//             }
-//         ];
-//         colDefs = addOptionToAllColumn(colDefs, {
-//             cellStyle: { textAlign: 'center' }
-//         });
-//         colDefs = addOptionToSomeColumn(colDefs, {
-//             minWidth: 40,
-//             cellEditor: editors.getNumericCellEditor(target = 'mark'),
-//         }, [
-//             constants.co1, constants.co2, constants.co3, constants.co4, constants.total
-//         ])
-//         return colDefs;
-//     },
+//     
 
 //     // REPORT: Mid1, Mid2, Final
 //     getMidAndFinal: () => {

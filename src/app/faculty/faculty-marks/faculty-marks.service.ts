@@ -22,4 +22,14 @@ export class FacultyMarksService {
             })
         )
     }
+
+    getStudentMarks = (sectionId, assessmentId) => {
+        let apiUrl = this.proxyPrefix + `/faculty/marks/${sectionId}/${assessmentId}`;
+        return this.http.get(apiUrl)
+        .pipe(
+            map(result => {
+                return result["data"];
+            })
+        )
+    }
 }

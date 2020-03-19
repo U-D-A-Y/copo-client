@@ -12,10 +12,8 @@
 
             </div> <!-- end row-->
             <hr>
-
             <div class="row ml-st-mrk">
                 <!-- Start First Row -->
-
                 <div class="col-md-7">
                     <!--Start Left Col -->
                     <div class="row student-mark-input-table-border">
@@ -26,14 +24,21 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group text-left">
                                         <!-- <label for="">Course</label> -->
-                                        <select class="form-control" id="assessmentSelector" disabled>
+                                        <select 
+                                            #markAssessmentSelector
+                                            (change)="markAssessmentChanged(markAssessmentSelector.value)" class="form-control" id="assessmentSelector">
                                             <option selected="" disabled>Assessments</option>
-                                            <option>Class Test</option>
+                                            <!-- <option value="Class Test">Class Test</option>
                                             <option>Exam Mid I</option>
                                             <option>Exam Mid II</option>
                                             <option>Final Exam</option>
                                             <option>Mini Project</option>
-                                            <option>Lab Exam</option>
+                                            <option>Lab Exam</option> -->
+                                            <option *ngFor="let ass of assessmentInformation"
+                                                [value]="ass.id"
+                                            >
+                                                {{ass.assessment}}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -66,9 +71,14 @@
                             <!-- Start mark input Row -->
                             <div class="student-table-scrol">
                                 <div class="col-md-12 table-scroling ml-1">
-                                    <div id="studentMarkTable" class="ag-theme-balham" style="height: 100%;">
-
-                                    </div>
+                                    <ag-grid-angular
+                                        #markAgGrid
+                                        class="ag-theme-balham"
+                                        style="height: 100%;"
+                                        [columnDefs]="markColDefs"
+                                        [rowData]="markRowData | async"
+                                    >
+                                    </ag-grid-angular>
 
                                 </div>
                             </div>
@@ -87,6 +97,7 @@
                             <!-- <div id="assessmentTable" class="ag-theme-balham">
                             </div> -->
                             <ag-grid-angular
+                                #assessmentAgGrid
                                 style="height: 100%;"
                                 [columnDefs]="assessmentColDefs"
                                 [rowData]="assessmentRowData | async"
