@@ -2,7 +2,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import { AgEditorComponent } from 'ag-grid-angular';
 
 @Component({
-    templateUrl: './numeric-cell-editor.component.html'
+    templateUrl: './numeric-cell-editor.component.html',
+    styleUrls: [ './numeric-cell-editor.component.css' ]
 })
 
 export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
@@ -37,13 +38,9 @@ export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
 
         // console.log('edit-stop', params);
         if (this.target === 'mark') {
-            // // This editor will be used for mark input. So, context will get passed 
-            // // and can be accessed here
-            // let selectedAssessmentName = getSelectedOptionText(params.context.assessmentSelector);
-            // let allAssessmentData = getAgGridAllData(params.context.assessmentAgGridOption);
-            // let selectedAssessmentData = allAssessmentData.find(
-            //     item => item.assessment === selectedAssessmentName
-            // );
+            // This editor will be used for mark input. So, context will get passed 
+            // and can be accessed here
+            // let selectedAssessmentData = params.context.selectedAssessment;
             // if (selectedAssessmentData.is_dna === 'T') {
             //     this.maxValue = selectedAssessmentData['exam_taken_in'];
             // } else {
@@ -52,8 +49,6 @@ export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
             //     let maxValue = selectedAssessmentData['mapping'][editedCoTitle] * ratio;
             //     this.maxValue = maxValue;
             // }
-
-            // console.log(selectedAssessmentData);
         }
     }
 
@@ -95,9 +90,9 @@ export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
             if (value > this.maxValue) {
                 // attach invalid class to element;
                 // console.log(this.eGridCell);
-                this.eGridCell.classList.add('mark-invalid');
+                this.params.eGridCell.classList.add('mark-invalid');
             } else {
-                this.eGridCell.classList.remove('mark-invalid');
+                this.params.eGridCell.classList.remove('mark-invalid');
             }
         }
         return false;   // don't cancel;
@@ -137,12 +132,6 @@ export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
         return event.keyCode === 39
             || event.keyCode === 37;
     };
-
-
-    // // any cleanup we need to be done here
-    // destroy = function () {
-    //     // but this example is simple, no cleanup, we could  even leave this method out as it's optional
-    // };
 
     // // if true, then this editor will appear in a popup 
     // isPopup = function () {

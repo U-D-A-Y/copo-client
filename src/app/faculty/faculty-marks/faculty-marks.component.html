@@ -26,14 +26,9 @@
                                         <!-- <label for="">Course</label> -->
                                         <select 
                                             #markAssessmentSelector
-                                            (change)="markAssessmentChanged(markAssessmentSelector.value)" class="form-control" id="assessmentSelector">
+                                            class="form-control"
+                                            (change)="markAssessmentChanged(markAssessmentSelector.value)">
                                             <option selected="" disabled>Assessments</option>
-                                            <!-- <option value="Class Test">Class Test</option>
-                                            <option>Exam Mid I</option>
-                                            <option>Exam Mid II</option>
-                                            <option>Final Exam</option>
-                                            <option>Mini Project</option>
-                                            <option>Lab Exam</option> -->
                                             <option *ngFor="let ass of assessmentInformation"
                                                 [value]="ass.id"
                                             >

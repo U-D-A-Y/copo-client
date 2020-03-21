@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { SharedModule } from '@common/shared.module';
@@ -26,6 +27,7 @@ import { from } from 'rxjs';
     ],
     imports: [
         CommonModule,
+        FormsModule,
         FacultyRoutingModule,
         AgGridModule,
         SharedModule,

@@ -699,6 +699,47 @@ export const getAssessmentCoMapping = () => {
  * Ag grid column definitions for showing student marks
  */
 export const getStudentMarks = () => {
+    let coMarkHeaders = [];
+    for (let i=1; i<=4; i++) {
+        let col = generateColDef(`marks.CO${i}`, constants[`co${i}`], {
+            editable: function(params) {
+                let ass = params.context.selectedAssessment;
+                let mapping = ass.mapping;
+                let coTitle = params.colDef.headerName;
+                if (Object.keys(mapping).includes(coTitle)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            cellClass: function(params) {
+                // console.log("cellclass", params);
+                let selectedAssessmentData = params.context.selectedAssessment;
+                let mapping = selectedAssessmentData.mapping;
+                let coTitle = params.colDef.headerName;
+                if (! Object.keys(mapping).includes(coTitle)) {
+                    return 'copo-markinput-cell-disabled';
+                }
+
+                let value = params.value;
+                let maxValue;
+                if (selectedAssessmentData.is_dna === 'T') {
+                    maxValue = selectedAssessmentData['exam_taken_in'];
+                } else {
+                    let ratio = selectedAssessmentData['exam_taken_in'] / selectedAssessmentData['total'];
+                    maxValue = mapping[coTitle] * ratio;
+                }
+
+                // console.log(value, maxValue);
+                if (value > maxValue) {
+                    // console.log("Mark should be invalid");
+                    return 'mark-invalid';
+                }
+            }
+        });
+        coMarkHeaders.push(col);
+    }
+
     let colDefs = [
         {
             ...slColumn
@@ -712,15 +753,9 @@ export const getStudentMarks = () => {
                 editable: false,
                 minWidth: 150
             })
-        }, {
-            ...generateColDef('marks.CO1', constants.co1)
-        }, {
-            ...generateColDef('marks.CO2', constants.co2)
-        }, {
-            ...generateColDef('marks.CO3', constants.co3)
-        }, {
-            ...generateColDef('marks.CO4', constants.co4)
-        }, {
+        }, 
+        ...coMarkHeaders, 
+        {
             headerName: constants.total,
             field: 'total',
             valueGetter: function (params) {
@@ -756,12 +791,6 @@ export const getStudentMarks = () => {
 }
 
 // export class ColDefs {
-//     
-
-//     
-
-//     
-
 //     // REPORT: Mid1, Mid2, Final
 //     getMidAndFinal: () => {
 //         let colDefs = [
