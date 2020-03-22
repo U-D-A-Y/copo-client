@@ -580,7 +580,7 @@ export const getStudentManagement = () => {
 /** 
  * Assessment and CO mapping for an offered section;
 */
-export const getAssessmentCoMapping = () => {
+export const getAssessmentCoMapping = (usage) => {
     let coMappingColumns = [];
     for (let i=1; i<=4; i++) {
         let col = generateColDef(`mapping.CO${i}`, constants[`co${i}`], {
@@ -679,6 +679,7 @@ export const getAssessmentCoMapping = () => {
             ...generateColDef('exam_taken_in', constants.exam_taken_in)
         }, {
             ...actionColumn,
+            hide: usage == 'marks'
         }
     ];
     colDefs = addOptionToAllColumn(colDefs, {
@@ -698,46 +699,58 @@ export const getAssessmentCoMapping = () => {
 /**
  * Ag grid column definitions for showing student marks
  */
-export const getStudentMarks = () => {
+export const getStudentMarks = (selectedAssessment) => {
     let coMarkHeaders = [];
-    for (let i=1; i<=4; i++) {
-        let col = generateColDef(`marks.CO${i}`, constants[`co${i}`], {
-            editable: function(params) {
-                let ass = params.context.selectedAssessment;
-                let mapping = ass.mapping;
-                let coTitle = params.colDef.headerName;
-                if (Object.keys(mapping).includes(coTitle)) {
-                    return true;
-                } else {
-                    return false;
+    let isDna = selectedAssessment.is_dna === 'T';
+    if (!isDna) {
+        for (let i=1; i<=4; i++) {
+            let col = generateColDef(`marks.CO${i}`, constants[`co${i}`], {
+                editable: function(params) {
+                    let ass = params.context.selectedAssessment;
+                    let mapping = ass.mapping;
+                    let coTitle = params.colDef.headerName;
+                    if (Object.keys(mapping).includes(coTitle)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
+                cellClass: function(params) {
+                    // console.log("cellclass", params);
+                    let selectedAssessmentData = params.context.selectedAssessment;
+                    let mapping = selectedAssessmentData.mapping;
+                    let coTitle = params.colDef.headerName;
+                    if (! Object.keys(mapping).includes(coTitle)) {
+                        return 'copo-markinput-cell-disabled';
+                    }
+                },
+                cellClassRules: {
+                    'mark-invalid': function(params) {
+                        let selectedAssessmentData = params.context.selectedAssessment;
+                        let mapping = selectedAssessmentData.mapping;
+                        let coTitle = params.colDef.headerName;
+    
+                        let value = params.value;
+                        let maxValue;
+                        if (selectedAssessmentData.is_dna === 'T') {
+                            maxValue = selectedAssessmentData['exam_taken_in'];
+                        } else {
+                            let ratio = selectedAssessmentData['exam_taken_in'] / selectedAssessmentData['total'];
+                            maxValue = mapping[coTitle] * ratio;
+                        }
+    
+                        // console.log("mark values", coTitle, value, maxValue);
+                        if (value > maxValue) {
+                            // console.log("Mark should be invalid");
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
                 }
-            },
-            cellClass: function(params) {
-                // console.log("cellclass", params);
-                let selectedAssessmentData = params.context.selectedAssessment;
-                let mapping = selectedAssessmentData.mapping;
-                let coTitle = params.colDef.headerName;
-                if (! Object.keys(mapping).includes(coTitle)) {
-                    return 'copo-markinput-cell-disabled';
-                }
-
-                let value = params.value;
-                let maxValue;
-                if (selectedAssessmentData.is_dna === 'T') {
-                    maxValue = selectedAssessmentData['exam_taken_in'];
-                } else {
-                    let ratio = selectedAssessmentData['exam_taken_in'] / selectedAssessmentData['total'];
-                    maxValue = mapping[coTitle] * ratio;
-                }
-
-                // console.log(value, maxValue);
-                if (value > maxValue) {
-                    // console.log("Mark should be invalid");
-                    return 'mark-invalid';
-                }
-            }
-        });
-        coMarkHeaders.push(col);
+            });
+            coMarkHeaders.push(col);
+        }
     }
 
     let colDefs = [
@@ -758,6 +771,7 @@ export const getStudentMarks = () => {
         {
             headerName: constants.total,
             field: 'total',
+            editable: isDna,
             valueGetter: function (params) {
                 if (params.colDef.editable) {
                     // DNA
@@ -771,8 +785,7 @@ export const getStudentMarks = () => {
                 }
                 params.data.total = total;
                 return total;
-            },
-            editable: false
+            }
         }
     ];
     colDefs = addOptionToAllColumn(colDefs, {

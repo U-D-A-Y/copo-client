@@ -28,7 +28,7 @@ export class FacultyCourseConfigComponent implements OnInit {
 
     ngOnInit(): void {
         this.studentColDefs = getStudentManagement();
-        this.assessmentColDefs = getAssessmentCoMapping();
+        this.assessmentColDefs = getAssessmentCoMapping('config');
         this.allAssessmentsColDefs = getAssessmentChooserColDef();
 
         this.allAssessments = this.service.getAllAssessments();

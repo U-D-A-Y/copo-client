@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { AgEditorComponent } from 'ag-grid-angular';
 
 @Component({
@@ -14,6 +14,8 @@ export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
     private target;
     private maxValue;
 
+    @ViewChild('inputField') inputField;
+
     agInit(params) {
         console.log("Num-Params", params);
         this.params = params;
@@ -24,6 +26,7 @@ export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
 
         if (this.isCharNumeric(params.charPress)) {
             // this.eInput.value = params.charPress;
+            console.log("cell value set");
             this.cellValue = params.charPress;
         } else {
             if (params.value !== undefined && params.value !== null) {
@@ -53,13 +56,20 @@ export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.params.eGridCell.focus();
+        // this.params.eGridCell.focus();
+        // console.log("input", this.inputField);
+        console.log("view init");
+        window.setTimeout(() => {
+            this.inputField.nativeElement.focus();
+        })
     }
 
     keyPressed(event) {
         // console.log(event);
         if (! this.isKeyPressedNumeric(event) &&
                 (! this.isKeyPressedDecimal(event) || this.isSecondDecimal(event, this.cellValue))) {
+            console.log("keypressed");
+            this.inputField.nativeElement.focus();
             if (event.preventDefault) event.preventDefault();
         } else if (this.isKeyPressedNavigation(event)) {
             event.stopPropagation();
@@ -84,16 +94,16 @@ export class NumericCellEditor implements AgEditorComponent, AfterViewInit {
     // - not very practical, but demonstrates the method.
     isCancelAfterEnd = function () {
         if (this.target === 'mark') {
-            var value = this.getValue();
-            console.log(value, this.maxValue)
-            // console.log(value);
-            if (value > this.maxValue) {
-                // attach invalid class to element;
-                // console.log(this.eGridCell);
-                this.params.eGridCell.classList.add('mark-invalid');
-            } else {
-                this.params.eGridCell.classList.remove('mark-invalid');
-            }
+            // var value = this.getValue();
+            // console.log(value, this.maxValue)
+            // // console.log(value);
+            // if (value > this.maxValue) {
+            //     // attach invalid class to element;
+            //     // console.log(this.eGridCell);
+            //     this.params.eGridCell.classList.add('mark-invalid');
+            // } else {
+            //     this.params.eGridCell.classList.remove('mark-invalid');
+            // }
         }
         return false;   // don't cancel;
     };

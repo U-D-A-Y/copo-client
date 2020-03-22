@@ -28,16 +28,20 @@ export class FacultyMarksComponent implements OnInit {
     markAgGridContext: MarkAgGridContext;
 
     ngOnInit(): void {
-        this.assessmentColDefs = getAssessmentCoMapping();
-        this.markColDefs = getStudentMarks();
+        this.assessmentColDefs = getAssessmentCoMapping('marks');
+        this.markColDefs = getStudentMarks({});
     }
 
     ngAfterViewInit() {
         this.assessmentAgGrid.api.sizeColumnsToFit();
         this.markAgGrid.api.sizeColumnsToFit();
 
+        this.assessmentAgGrid.gridOptions.getRowNodeId = (data) => {
+            return data.id;
+        }
+
         this.markAgGridContext = <MarkAgGridContext> {
-            selectedAssessment: []
+            selectedAssessment: {}
         }
     }
 
@@ -61,12 +65,18 @@ export class FacultyMarksComponent implements OnInit {
         this.markAgGridContext.selectedAssessment = selectedAssessmentData;
         console.log("context", this.markAgGridContext);
 
+        this.markAgGrid.api.setColumnDefs(getStudentMarks(selectedAssessmentData));
+        this.markAgGrid.api.sizeColumnsToFit();
         this.markAgGrid.gridOptions.context = this.markAgGridContext;
         this.markAgGrid.api.refreshCells();
         this.markAgGrid.api.refreshHeader();
+
+        let rowNodeToSelect = this.assessmentAgGrid.api.getRowNode(assessmentId);
+        console.log("selected", rowNodeToSelect);
+        rowNodeToSelect.setSelected(true, true);
     }
 }
 
 interface MarkAgGridContext {
-    selectedAssessment: [];
+    selectedAssessment: {};
 }
