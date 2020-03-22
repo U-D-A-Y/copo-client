@@ -17,9 +17,9 @@ import { CourseSectionSelectorComponent } from './common/components/course-secti
 @NgModule({
     declarations: [
         AppComponent,
-        LeftBarComponent,
-        LeftBarAdminComponent,
-        LeftBarFacultyComponent,
+        // LeftBarComponent,
+        // LeftBarAdminComponent,
+        // LeftBarFacultyComponent,
         // CourseSectionSelectorComponent
     ],
     imports: [

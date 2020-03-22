@@ -16,6 +16,7 @@ import { AdminCopoComponent } from './admin-copo/admin-copo.component';
 import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { AdminChartsComponent } from './admin-charts/admin-charts.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { LeftBarModule } from '../left-bar/left-bar.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
     ],
     imports: [
         CommonModule,
+        LeftBarModule,
         AdminRoutingModule,
         AgGridModule,
         SharedModule,

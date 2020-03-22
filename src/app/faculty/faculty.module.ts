@@ -6,6 +6,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { SharedModule } from '@common/shared.module';
 import { GridModule } from '@common/grid-components/grid.module';
 
+import { LeftBarModule } from '../left-bar/left-bar.module';
+
 import { FacultyRoutingModule } from './faculty-routing.module';
 
 import { FacultyComponent } from './faculty.component';
@@ -24,14 +26,18 @@ import { from } from 'rxjs';
         FacultyProfileComponent, 
         FacultyMarksComponent, 
         FacultyReportsComponent,
+        // LeftBarComponent,
+        // LeftBarFacultyComponent,
+        // LeftBarAdminComponent,
     ],
     imports: [
         CommonModule,
         FormsModule,
+        LeftBarModule,
         FacultyRoutingModule,
         AgGridModule,
         SharedModule,
-        GridModule
+        GridModule,
     ],
     providers: [
     ]

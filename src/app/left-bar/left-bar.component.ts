@@ -18,16 +18,12 @@ export class LeftBarComponent implements OnInit {
     role: any;
 
     ngOnInit(): void {
-        // TODO: This works but I don't like this. Try to improve
-        this.router.events.pipe(
-            filter(e => e instanceof NavigationEnd),
-        ).subscribe(res => {
-            // console.log("nav end", res);
-            let url = res["url"];
-            let role = url.split("/")[1];
-            // console.log("role", role);
-            this.role = role;
-        })
+        // console.log("route", this.route.snapshot);
+        // this.route.url.subscribe(url => {
+        //     console.log("route url", url);
+        // })
+        // console.log(this.route.routeConfig);
+        this.role = this.route.routeConfig.path;
     }
 
 }
