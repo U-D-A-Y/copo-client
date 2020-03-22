@@ -18,6 +18,11 @@ const routes: Routes = [
         component: AdminComponent,
         children: [
             {
+                path: '',
+                redirectTo: 'dashboard',
+                pathMatch: 'full'
+            },
+            {
                 path: 'dashboard',
                 component: AdminDashboardComponent,
             }, {

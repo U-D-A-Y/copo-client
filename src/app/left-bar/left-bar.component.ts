@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { switchMap, filter, map } from 'rxjs/operators';
+import { LeftBarService } from './left-bar.service';
 
 @Component({
     selector: 'app-left-bar',
     templateUrl: './left-bar.component.html',
-    styleUrls: ['./left-bar.component.css']
+    styleUrls: ['./left-bar.component.css'],
+    providers: [ LeftBarService ]
 })
 export class LeftBarComponent implements OnInit {
 
     constructor(
+        private service: LeftBarService,
         private route: ActivatedRoute,
-        private router: Router
     ) { }
 
     role: any;
@@ -24,6 +26,13 @@ export class LeftBarComponent implements OnInit {
         // })
         // console.log(this.route.routeConfig);
         this.role = this.route.routeConfig.path;
+    }
+
+    logOut() {
+        this.service.logOut()
+        .subscribe(result => {
+
+        })
     }
 
 }

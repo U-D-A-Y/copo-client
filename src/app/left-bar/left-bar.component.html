@@ -8,10 +8,12 @@
         </div>
         <left-bar-faculty *ngIf="role === 'faculty'"></left-bar-faculty>
         <left-bar-admin *ngIf="role === 'admin'"></left-bar-admin>
+        
+        <button (click)="logOut()" class="btn btn-danger mt-5 ml-5 logout-btn"> Logout</button>
     </div>
 </nav>
 
-<script>
+<!-- <script>
     let logoutBtn = document.getElementsByClassName('btn-danger')[0];
     logoutBtn.addEventListener('click', function(event) {
         axios.post('/auth/logout')
@@ -22,4 +24,4 @@
                 window.location.href = '/';
             })
     })
-</script>
+</script> -->
