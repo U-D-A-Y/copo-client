@@ -29,17 +29,23 @@ export class SemesterSelectorComponent implements OnInit {
         })
         // Call the function for the first time;
         this.service.getCurrentSemesterAndYear();
+    }
 
+    ngAfterViewInit() {
         // When parent updates semester, refresh the current semester;
-        this.eventSubscription = this.refreshSemester.subscribe( () => {
-            // console.log("I've got semester change notification");
-            this.refreshCurrentSemester();
-        })
+        if (this.refreshSemester) {
+            this.eventSubscription = this.refreshSemester.subscribe( () => {
+                // console.log("I've got semester change notification");
+                this.refreshCurrentSemester();
+            })
+        }
     }
 
     ngOnDestroy() {
         this.semesterSubscription.unsubscribe();
-        this.eventSubscription.unsubscribe();
+        if (this.eventSubscription) {
+            this.eventSubscription.unsubscribe();
+        }
     }
 
     refreshCurrentSemester() {
