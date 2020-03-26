@@ -307,6 +307,11 @@ export const getAdminStudents = () => {
             ...actionColumn
         }
     ]
+    colDefs = addOptionToAllColumn(colDefs, {
+        cellStyle: {
+            textAlign: 'center'
+        }
+    });
     return colDefs;
 }
 

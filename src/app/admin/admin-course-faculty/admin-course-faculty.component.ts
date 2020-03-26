@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminCourseFacultyService } from './admin-course-faculty.service';
 import { getAdminCourses, getAdminFaculty } from '../../common/colDefs';
+import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
     selector: 'app-admin-course-faculty',
@@ -18,12 +19,20 @@ export class AdminCourseFacultyComponent implements OnInit {
     facultyColDefs: any;
     facultyRowData: any;
 
+    @ViewChild('courseAgGrid') courseAgGrid: AgGridAngular;
+    @ViewChild('facultyAgGrid') facultyAgGrid: AgGridAngular;
+
     ngOnInit(): void {
         this.courseColDefs = getAdminCourses();
         this.courseRowData = this.service.getAllCourses();
         
         this.facultyColDefs = getAdminFaculty();
         this.facultyRowData = this.service.getAllFaculty();
+    }
+
+    ngAfterViewInit() {
+        this.courseAgGrid.api.sizeColumnsToFit();
+        this.facultyAgGrid.api.sizeColumnsToFit();
     }
 
 }
