@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { AdminDashboardService } from './admin-dashboard.service';
 
+import { getAdminSemester } from '@common/colDefs';
+
 import * as alertify from 'alertifyjs';
+import { AgGridAngular } from 'ag-grid-angular';
+import { Subject } from 'rxjs';
 @Component({
     selector: 'app-admin-dashboard',
     templateUrl: './admin-dashboard.component.html',
@@ -19,6 +23,13 @@ export class AdminDashboardComponent implements OnInit {
     courseCount: Number;
     studentCount: Number;
 
+    semesterColDefs: any;
+    semesterRowData: any;
+
+    eventSubject: Subject<void> = new Subject<void>();
+
+    @ViewChild('semesterAgGrid') semesterAgGrid: AgGridAngular;
+
     ngOnInit(): void {
         this.service.getCurrentSemesterAndYear()
         .subscribe(curSem => {
@@ -32,15 +43,36 @@ export class AdminDashboardComponent implements OnInit {
             this.courseCount = totals["course"];
             this.studentCount = totals["student"];
         })
+
+        
+        this.semesterColDefs = getAdminSemester();
+        this.semesterRowData = this.service.getAllSemesters();
+    }
+
+    ngAfterViewInit() {
+        this.semesterAgGrid.api.sizeColumnsToFit();
+    }
+
+    // Propagate Semester Change
+    propagateSemesterChange() {
+        this.eventSubject.next();
     }
 
     // handleSemesterUpdate
-    handleSemesterUpdate(semester, year) {
-        console.log(semester, year);
+    handleSemesterUpdate() {
+        let selectedRows = this.semesterAgGrid.api.getSelectedRows();
+        if (selectedRows.length == 0) {
+            alert("Please select a semester first");
+            return;
+        }
+        let semester = selectedRows[0].semester;
+        let year = selectedRows[0].year;
+        // console.log(selectedRows);
         this.service.updateCurrentSemester(semester, year)
         .subscribe(
             result => {
-                alertify.success('Successfully Updated')
+                alertify.success('Successfully Updated');
+                this.propagateSemesterChange();
             },
             error => {
                 alertify.error("Failed to update semester");

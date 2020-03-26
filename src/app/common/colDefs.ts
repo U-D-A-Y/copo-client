@@ -197,6 +197,36 @@ const generateReportTotalValue = function (params, assessmentTitle) {
 }
 /** END - GENERATE TOTAL VALUE COLUMN IN REPORTS **/
 
+export const getAdminSemester = () => {
+    let titleCase = (str) => {
+        return str[0].toUpperCase() + str.substr(1).toLowerCase();
+    }
+    let colDefs = [
+        { 
+            ...slColumn,
+            checkboxSelection: true
+        },
+        { 
+            ...generateColDef('semester', 'Semester', {
+                cellStyle: {
+                    textAlign: 'center'
+                },
+                valueFormatter: function(params) {
+                    // console.log("params", params);
+                    let value = params.value;
+                    return titleCase(value);
+                }
+            })
+        }, {
+            ...generateColDef('year', 'Year', {
+                cellStyle: {
+                    textAlign: 'center'
+                }
+            })
+        }
+    ]
+    return colDefs;
+}
 
 export const getAdminCourses = () => {
     let colDefs = [

@@ -11,6 +11,15 @@ export class AdminDashboardService {
 
     proxyPrefix = "/api";
 
+    getAllSemesters() {
+        let apiURL = this.proxyPrefix + "/admin/semesters";
+        return this.http.get(apiURL)
+        .pipe(
+            map(result => {
+                return result["data"];
+            })
+        )
+    }
     
     getCurrentSemesterAndYear() {
         let semApiUrl = this.proxyPrefix + "/common/semester/current";

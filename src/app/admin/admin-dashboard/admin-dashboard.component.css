@@ -52,7 +52,12 @@
     margin-bottom: 9px;
 }
 
-.semester-year,
+.semester-year {
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 20px 30px;
+    height: 500px;
+}
 .add-user {
     border: 1px solid #888;
     border-radius: 5px;
