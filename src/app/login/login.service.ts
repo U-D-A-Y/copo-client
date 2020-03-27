@@ -29,7 +29,12 @@ export class LoginService {
                     // window.location.href = `${access}/${access}_dashboard`;
                     this.router.navigate([`/${role}`]);
                 } else {
-                    alert('Username/Password Incorecct!');
+                    let error = result["error"];
+                    if (error["message"]) {
+                        alert(error["message"]);
+                    } else {
+                        alert('Username/Password Incorecct!');
+                    }
                 }
             })
         )       
