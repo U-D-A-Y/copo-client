@@ -1,6 +1,10 @@
 .active {
-    background-color: #2c7522;
+    background-color: #1ac0d266;
     font-weight: bold;
+}
+
+.sidebar-menu-item a {
+    color: white;
 }
 
 .svg-inline--fa {
