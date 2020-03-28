@@ -6,14 +6,20 @@ import { AdminComponent } from './admin/admin.component';
 import { FacultyComponent } from './faculty/faculty.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthGuard } from './guard/auth.guard';
+import { RoleGuard } from './guard/role.guard';
+
 const appRoutes: Routes = [
     {
         path: 'admin',
-        component: AdminComponent
+        component: AdminComponent,
+        canActivate: [AuthGuard, RoleGuard]
     },
     {
         path: 'faculty',
-        component: FacultyComponent
+        component: FacultyComponent,
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard, RoleGuard]
     },
     {
         path: '',

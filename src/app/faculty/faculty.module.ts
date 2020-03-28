@@ -17,7 +17,6 @@ import { FacultyCourseConfigComponent } from './course-config/course-config.comp
 import { FacultyProfileComponent } from './profile/profile.component';
 import { FacultyMarksComponent } from './faculty-marks/faculty-marks.component';
 import { FacultyReportsComponent } from './faculty-reports/faculty-reports.component';
-import { from } from 'rxjs';
 @NgModule({
     declarations: [
         FacultyComponent,
@@ -26,9 +25,6 @@ import { from } from 'rxjs';
         FacultyProfileComponent, 
         FacultyMarksComponent, 
         FacultyReportsComponent,
-        // LeftBarComponent,
-        // LeftBarFacultyComponent,
-        // LeftBarAdminComponent,
     ],
     imports: [
         CommonModule,

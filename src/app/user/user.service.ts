@@ -19,7 +19,12 @@ export class UserService {
 
     getUserInfo(): User {
         let userString = localStorage.getItem('copo-user');
-        let user: User = JSON.parse(userString);
+        let user: User;
+        try {
+            user = JSON.parse(userString);
+        } catch(err) {
+            return null;
+        }
         return user;
     }
 

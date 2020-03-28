@@ -12,20 +12,4 @@ export class LeftBarService {
     ) {}
 
     proxyPrefix = "/api";
-
-    logOut() {
-        let apiUrl = this.proxyPrefix + "/auth/logout";
-
-        return this.http.post(apiUrl, {})
-        .pipe(
-            map(result => {
-                console.log("logout", result);
-                this.router.navigate(['/']);
-            }),
-            catchError(error => {
-                console.log("logout error", error);
-                return throwError(error);
-            })
-        )
-    }
 }

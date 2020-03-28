@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { User, UserService} from '../user/user.service';
-@Injectable()
+import { throwError } from 'rxjs';
+@Injectable({
+    providedIn: 'root'
+})
 export class LoginService {
     constructor(
         private http: HttpClient,
@@ -41,6 +44,24 @@ export class LoginService {
                 }
             })
         )       
+    }
+
+    logOut() {
+        let apiUrl = this.proxyPrefix + "/auth/logout";
+
+        return this.http.post(apiUrl, {})
+        .pipe(
+            map(result => {
+                console.log("logout", result);
+                // Remove user info from storage
+                this.userService.removeUserInfo();
+                this.router.navigate(['/']);
+            }),
+            catchError(error => {
+                console.log("logout error", error);
+                return throwError(error);
+            })
+        )
     }
     
 

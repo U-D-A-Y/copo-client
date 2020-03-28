@@ -9,10 +9,13 @@ import { FacultyMarksComponent } from './faculty-marks/faculty-marks.component';
 import { FacultyReportsComponent } from './faculty-reports/faculty-reports.component';
 import { FacultyProfileComponent } from './profile/profile.component';
 
+import { AuthGuard } from '../guard/auth.guard';
+import { RoleGuard } from '../guard/role.guard';
 const routes: Routes = [
     {
         path: 'faculty',
         component: FacultyComponent,
+        canActivateChild: [AuthGuard, RoleGuard],
         children: [
             {
                 path: '',
