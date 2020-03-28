@@ -1,8 +1,10 @@
 <div class="col-md-4 col-sm-6">
     <div class="form-group text-center">
-        <select #courseSelector class="form-control" (change)="courseChanged(courseSelector.value)">
-            <option selected="" disabled>Course</option>
-            <option *ngFor="let course of courses" [(selected)]="course.selected">
+        <select #courseSelector class="form-control" (change)="courseChanged()"
+            [(ngModel)]="selectedCourse" [compareWith]="courseCompare"
+        >
+            <option selected="selected" disabled>Course</option>
+            <option *ngFor="let course of courses" [ngValue]="course">
                 {{course.code}}
             </option>
         </select>
@@ -10,9 +12,11 @@
 </div>
 <div class="col-md-4 col-sm-6">
     <div class="form-group text-center">
-        <select #sectionSelector class="form-control" (change)="sectionChanged(sectionSelector.value)">
-            <option selected="" disabled>Section</option>
-            <option *ngFor="let section of sections" [(selected)]="section.selected">
+        <select #sectionSelector class="form-control" (change)="sectionChanged()"
+            [(ngModel)]="selectedSection"
+        >
+            <option selected="!selectedSection" disabled>Section</option>
+            <option *ngFor="let section of courseSections" [ngValue]="section">
                 {{section.section}}
             </option>
         </select>
