@@ -48,9 +48,13 @@ export class CourseSectionSelectorService {
         return this.selectedCourseObject;
     }
 
+    getSelectedSectionObject() {
+        return this.selectedSectionObject;
+    }
+
     getSectionsOfSelectedCourse() {
         let selectedCourseCode = this.getSelectedCourseCode();
-        if (selectedCourseCode) {
+        if (selectedCourseCode && this.courseInformation) {
             let sections = this.courseInformation[selectedCourseCode];
             return sections;
         } else {

@@ -28,17 +28,19 @@ export class CourseSectionSelectorComponent implements OnInit {
         console.log("Section Selector Created");
         this.service.getRegistedCourses()
         .subscribe(result => {
-            // console.log("res in component", result);
             this.courses = result;
             this.courseSections = this.service.getSectionsOfSelectedCourse();
+
             this.selectedCourse = this.service.getSelectedCourseObject();
-            // console.log("sel crs", this.selectedCourse);
-            // console.log("this.courses", this.courses);
+            this.selectedSection = this.service.getSelectedSectionObject();
+            if (this.selectedSection) {
+                this.sectionChanged();
+            }
         })
 
         let courseCodeFromRoute = this.route.snapshot.paramMap.get('code');
         if (courseCodeFromRoute) {
-            // this.courseChanged(courseCodeFromRoute);
+            this.setCourseCodeFromRoute(courseCodeFromRoute);
         }
     }
 
@@ -48,6 +50,19 @@ export class CourseSectionSelectorComponent implements OnInit {
         } else {
             return false;
         }
+    }
+
+    setCourseCodeFromRoute(courseCode) {
+        let courseObject = {
+            'code': courseCode
+        };
+        this.selectedCourse = courseObject;
+        this.service.updateSelectedCourseObject(this.selectedCourse);
+        this.courseSections = this.service.getSectionsOfSelectedCourse();
+
+        // TODO: Temporary
+        this.selectedSection = this.courseSections[0];
+        this.sectionChanged();
     }
 
     /**
@@ -60,7 +75,7 @@ export class CourseSectionSelectorComponent implements OnInit {
     }
 
     sectionChanged() {
-        // console.log("comp|section| courses array", this.courses);
+        console.log("comp|section| courses array", this.courses);
         this.service.updateSelectedSection(this.selectedSection);
 
         let courseCode = this.selectedCourse["code"];
