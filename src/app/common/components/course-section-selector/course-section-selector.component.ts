@@ -33,8 +33,14 @@ export class CourseSectionSelectorComponent implements OnInit {
 
             this.selectedCourse = this.service.getSelectedCourseObject();
             this.selectedSection = this.service.getSelectedSectionObject();
+            if (!this.selectedCourse) {
+                this.selectedCourse = null;
+            }
+
             if (this.selectedSection) {
                 this.sectionChanged();
+            } else {
+                this.selectedSection = null;
             }
         })
 
@@ -72,6 +78,9 @@ export class CourseSectionSelectorComponent implements OnInit {
     courseChanged() {
         this.service.updateSelectedCourseObject(this.selectedCourse);
         this.courseSections = this.service.getSectionsOfSelectedCourse();
+
+        // set section to null
+        this.selectedSection = null;
     }
 
     sectionChanged() {

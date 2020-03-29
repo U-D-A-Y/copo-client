@@ -3,7 +3,7 @@
         <select #courseSelector class="form-control" (change)="courseChanged()"
             [(ngModel)]="selectedCourse" [compareWith]="courseCompare"
         >
-            <option selected="selected" disabled>Course</option>
+            <option [value]="null" [disabled]="true">Course</option>
             <option *ngFor="let course of courses" [ngValue]="course">
                 {{course.code}}
             </option>
@@ -15,7 +15,7 @@
         <select #sectionSelector class="form-control" (change)="sectionChanged()"
             [(ngModel)]="selectedSection"
         >
-            <option selected="!selectedSection" disabled>Section</option>
+            <option [value]="null" disabled>Section</option>
             <option *ngFor="let section of courseSections" [ngValue]="section">
                 {{section.section}}
             </option>
