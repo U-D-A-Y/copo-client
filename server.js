@@ -12,6 +12,7 @@ var app = express();
 var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
-app.listen(4200, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     console.log("Client is running on port 4200");
 })
