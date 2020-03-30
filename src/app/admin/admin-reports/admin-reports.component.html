@@ -2,22 +2,18 @@
     <!-- sidebar-wrapper  -->
     <main class="page-content">
         <div class="container-fluid">
-
             <div class="row">
-                <!-- Start First Row -->
-
-                <div class="col-md-11">
-                    <!--Start Left Col -->
-
+                <div class="col-md-12">
                     <div class="row">
-                        <!-- Start Course & Section Row -->
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-4 col-sm-6">
-                                    <div class="form-group text-center">
+                                    <div class="form-group 
+                    text-center">
+
                                         <!-- <label for="">Course</label> -->
-                                        <select class="form-control" id="courseSelector">
-                                            <option selected="" disabled>Course</option>
+                                        <select class="form-control" id="yearSelector">
+                                            <option selected="" disabled>Year</option>
                                         </select>
                                     </div>
                                 </div>
@@ -25,53 +21,56 @@
                                 <div class="col-md-4 col-sm-6">
                                     <div class="form-group text-center">
                                         <!-- <label for="">Section</label> -->
-                                        <select class="form-control" id="sectionSelector">
-                                            <option selected="" disabled>Section</option>
+                                        <select class="form-control" id="semesterSelector">
+                                            <option selected="" disabled>Semester</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- 
-                  <div class="col-md-5">
-                    <marquee>
-                      <h5> Thursday, 28 November, 2019 </h5>
-                    </marquee>
-                  </div> -->
-                    </div> <!-- End Course & Section Row -->
+                    </div>
                     <hr>
                 </div>
-            </div> <!-- End First Row-->
+            </div>
 
             <div class="row">
-                <div class="col-md-11 student-mark-input-table-border">
+                <div class="col-md-12 student-mark-input-table-border">
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-3 col-sm-6">
+                                <div class="col-md-4 col-sm-6">
                                     <div class="form-group text-center">
-                                        <!-- <label for="">Course</label> -->
-                                        <select class="form-control" id="reportSelector" disabled>
-                                            <option selected="" disabled>Reports</option>
-                                            <option value="mid1">Mid I</option>
-                                            <option value="mid2">Mid II</option>
-                                            <option value="final">Final</option>
-                                            <option value="obe1">OBE I</option>
-                                            <option value="obe2">OBE II</option>
-                                            <option value="tabulation">Tabulation</option>
-                                            <option value="gradesheet">Grade Sheet</option>
-                                        </select>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input #coursePillBox type="text" (keyup)="coursePillBoxKeyUp($event)" class="form-control">
+                                            </div>
+                                            <div class="col-md-12 " style="min-height: 70px;background-color:#E7E4E4;"
+                                                #coursePillBoxholder>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="form-group text-center">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input type="text" #studentPillBoxInput class="form-control" (keyup)="studentPillBoxKeyUp($event)">
+                                            </div>
+                                            <div class="col-md-12" style="min-height: 70px;background-color:#E7E4E4;"
+                                                #studentPillBoxholder>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4"></div>
-                                <div class="col-md-5 text-right ml">
-                                    <button class="btn btn-success preview-btn" type="button"
-                                        id="reportPreviewBtn">Preview</button>
+                                <div class="col-md-4 text-right ml">
+                                    <button class="btn btn-success" type="button"
+                                        id="reportGenerateBtn" (click)="generateReport()">Preview</button>
                                 </div>
-                            </div><!-- End Assessment drop down & Search Row -->
+                            </div>
                         </div>
-                    </div> <!-- Ende Second Row -->
+                    </div>
+
                     <hr>
 
                     <div class="row">
@@ -95,16 +94,22 @@
                         <!-- Start mark input Row -->
                         <div class="student-table-scrol" style="height: 460px;">
                             <div class="col-md-12 table-scroling ">
-                                <div id="reportTable" class="ag-theme-balham" style="height: 100%;">
-
-                                </div>
+                                <ag-grid-angular
+                                    #reportAgGrid
+                                    class="ag-theme-balham"
+                                    [domLayout]="'autoHeight'"
+                                    [columnDefs]="reportColDefs"
+                                    [rowData]="reportRowData | async"
+                                >
+                                </ag-grid-angular>
                             </div>
                         </div>
-                    </div> <!-- End mark input Row -->
+
+                    </div>
                 </div>
-            </div>
+
+            </div> <!-- Container Fluid End -->
         </div>
     </main>
     <!-- page-content" -->
 </div>
-<!-- page-wrapper -->
