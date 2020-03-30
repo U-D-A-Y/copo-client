@@ -17,9 +17,11 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group text-center">
-
-                                        <select class="form-control" id="courseSelector">
-                                            <option selected="" disabled>Course</option>
+                                        <select class="form-control" [(ngModel)]="selectedCoursePk" (change)=courseChanged()>
+                                            <option [value]="''" selected="" disabled>Course</option>
+                                            <option [value]="course.course_pk" *ngFor="let course of (allCourses | async)">
+                                                {{course.course_code}}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -46,8 +48,16 @@
                             <!-- Start mark input Row -->
                             <div class="student-table-scrol">
                                 <div class="col-md-12 table-scroling ml-1">
-                                    <div id="copoTable" class="ag-theme-balham" style="height: 100%;">
-                                    </div>
+                                    <!-- <div id="copoTable" class="ag-theme-balham" style="height: 100%;">
+                                    </div> -->
+                                    <ag-grid-angular
+                                        #copoAgGrid
+                                        class="ag-theme-balham"
+                                        [domLayout]="'autoHeight'"
+                                        [columnDefs]="copoColDefs"
+                                        [rowData]="copoRowData | async"
+                                    >
+                                    </ag-grid-angular>
                                 </div>
                             </div> <!-- End mark input Row -->
                         </div>

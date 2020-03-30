@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 import { SharedModule } from '@common/shared.module';
 
@@ -34,6 +35,7 @@ import { LeftBarModule } from '../left-bar/left-bar.module';
     ],
     imports: [
         CommonModule,
+        FormsModule,
         LeftBarModule,
         AdminRoutingModule,
         AgGridModule,
