@@ -1,14 +1,8 @@
-<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-    <i class="fas fa-bars"></i>
-</a>
-<nav id="sidebar" class="sidebar-wrapper">
-    <div class="sidebar-content">
-        <div class="sidebar-brand text-center">
-            <a routerLink="{{role}}/dashboard">East West University</a>
-        </div>
-        <left-bar-faculty *ngIf="role === 'faculty'"></left-bar-faculty>
-        <left-bar-admin *ngIf="role === 'admin'"></left-bar-admin>
-        
-        <button (click)="logOut()" class="btn btn-danger mt-5 ml-5 logout-btn"> Logout</button>
+<div class="leftBar">
+    <div class="leftBar-header">
+        <a routerLink="{{role}}/dashboard">East West University</a>
     </div>
-</nav>
+    <left-bar-faculty *ngIf="role === 'faculty'"></left-bar-faculty>
+    <left-bar-admin *ngIf="role === 'admin'"></left-bar-admin>
+    <button (click)="logOut()" class="btn logoutBtn"> Logout</button>
+</div>
