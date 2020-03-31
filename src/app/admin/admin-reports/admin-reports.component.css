@@ -1,28 +1,14 @@
-
-.col-md-5.text-right.ml {
-    margin-left: -4px;
-}
-
-.svg-inline--fa {
-    margin-right: 6px !important;
-}
-
-.btn {
-    padding: 0.275rem 2.25rem !important;
+.ml {
+    margin-left: 0px;
 }
 
 .form-group {
     margin-bottom: 0 !important;
 }
 
-.sidebar-wrapper .sidebar-brand a {
-    margin-top: 18px;
-    margin-bottom: 18px;
-    color: white !important;
-}
-
-.header-menu span {
-    font-size: 20px !important;
+.form-control.form-control-sm.ml-3.w-75.text-center.search-button {
+    margin-left: 130px !important;
+    padding: 1rem .75rem !important;
 }
 
 .page-wrapper.toggled .page-content {
@@ -32,31 +18,13 @@
 .form-group.input-group select {
     font-size: 24px;
     text-align: center;
+    background-color: #689F38 !important;
     color: #fff;
-}
-
-.select-same-font button {
-    font-size: 24px;
 }
 
 .file-field input {
     font-size: 24px !important;
     height: 36px !important;
-}
-
-.sidebar-dropdown::before {
-    position: absolute;
-    width: 4px;
-    background: green;
-    height: 35px;
-    content: "";
-    margin-top: -4px;
-    left: 7px;
-}
-
-.sidebar-dropdown:hover:before {
-    background: red !important;
-    width: 8px;
 }
 
 .form-group select {
@@ -70,70 +38,48 @@
     margin-bottom: 9px;
 }
 
-.assessments-table-border {
-    box-shadow: 0px 4px 4px 0px #888;
-    border-radius: 5px;
-    border: 1px solid;
-    margin-left: 60px;
-}
-
 .student-mark-input-table-border {
     box-shadow: 0px 4px 4px 0px #888;
     border-radius: 5px;
     border: 1px solid;
+    margin-right: 8px;
 }
 
 .col-md-12.table-scroling {
-    max-height: calc(100% - 5%);
-    height: calc(100% - 5%);
+    max-height: calc(100% - 30%);
+    height: calc(100% - 30%);
     overflow-y: auto;
     position: relative;
 }
 
 .student-table-scrol {
-    width: 992px;
+    width: 1034px;
     z-index: 999;
-    height: 330px !important;
+    height: 340px;
 }
 
-.student-dlt-btn {
-    padding: 0px 0px 2px 8px !important;
+.parentPillDiv {
+    float: left;
+    margin: 3px;
+    background-color: #8FE4D6;
 }
 
-.form-control.form-control-sm.ml-3.w-75.text-center.search-button {
-    margin-left: 71px !important;
-    padding: 16px 0;
+.parentPillDiv .btnPillBox {
+    background-color: #3EAA9F;
+    color: #fff;
 }
 
-.preview-btn {
-    margin-right: -3px !important;
-    font-size: 18px;
+.show-cell {
+    background: white;
+    font-weight: bolder;
+    border-right: 2px solid lightgrey !important;
+    border-bottom: 3px solid lightgrey !important;
 }
 
-.total-column-cell {
-    background-color: rgba(250, 235, 215, 0.90);
+.show-name {
+    font-weight: bold;
 }
 
-.total-column-header {
-    background-color: cornsilk;
-}
-
-.co-column-cell {
-    background-color: aliceblue;
-}
-
-.co-column-header {
-    background-color: lavender;
-}
-
-.total-column-cell {
-    background-color: rgb(154, 199, 64);
-}
-
-.co-status-cell {
-    background-color: aquamarine;
-}
-
-.co-status-header {
-    background-color: burlywood;
+.show-presenter {
+    font-style: italic;
 }

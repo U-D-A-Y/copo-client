@@ -4,6 +4,8 @@ import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router
 import { switchMap, filter, map } from 'rxjs/operators';
 import { LeftBarService } from './left-bar.service';
 
+import { LoginService } from '../login/login.service';
+
 @Component({
     selector: 'app-left-bar',
     templateUrl: './left-bar.component.html',
@@ -15,6 +17,7 @@ export class LeftBarComponent implements OnInit {
     constructor(
         private service: LeftBarService,
         private route: ActivatedRoute,
+        private loginService: LoginService
     ) { }
 
     role: any;
@@ -29,9 +32,8 @@ export class LeftBarComponent implements OnInit {
     }
 
     logOut() {
-        this.service.logOut()
-        .subscribe(result => {
-
+        this.loginService.logOut().subscribe(result => {
+            
         })
     }
 

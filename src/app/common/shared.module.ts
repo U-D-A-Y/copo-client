@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { CourseSectionSelectorComponent } from './components/course-section-selector/course-section-selector.component';
 import { SemesterSelectorComponent } from './components/semester-selector/semester-selector.component';
@@ -9,7 +10,8 @@ import { SemesterSelectorService } from './components/semester-selector/semester
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        FormsModule
     ],
     declarations: [
         CourseSectionSelectorComponent,

@@ -12,7 +12,7 @@ export class AdminCourseService {
         return this.http.get(apiUrl)
         .pipe(
             map(result => {
-                result = result["data"];
+                // result = result["data"];
                 if (result["success"]) {
                     return result["data"];
                 } else {

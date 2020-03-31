@@ -11,83 +11,92 @@ export class CourseSectionSelectorService {
 
     courseInformation: any;
 
-    courseIdMap: any;
-    sectionIdMap: any;
-
-    selectedCourse: any;
-    selectedSection: any;
+    selectedCourseObject: any;
+    selectedSectionObject: any;
 
     getRegistedCourses = () => {
         if (this.courseInformation) {
-            console.log("has courseinformation", this.courseInformation);
-            // return new Observable(this.courseInformation);
-            return of(this.courseInformation);
+            // console.log("has courseinformation", this.courseInformation);
+            let dataForComponent = this.formatCourseInfoForComponent(this.courseInformation);
+            return of(dataForComponent);
         }
         let apiUrl = this.proxyPrefix + '/faculty/faculty/sections';
         return this.http.get(apiUrl)
         .pipe(
             map(result => {
-                // result = result["data"];
-                console.log("section result", result["data"]);
+                // console.log("section result", result["data"]);
                 if (result["success"] === true) {
-                    // return courseInformation = result.data;
-                    // Add a selcted property
                     let data = result["data"];
-                    for (let course of data) {
-                        // Add a new property to each course;
-                        course["selected"] = false;
-                        let sections = course["section"];
-                        for (let section of sections) {
-                            section["selected"] = false;
-                        }
-                    }
-                    this.courseInformation = data    // save it here
-                    return data;
+                    this.courseInformation = this.formatCourseInfoForStore(data);
+                    let dataForComponent = this.formatCourseInfoForComponent(this.courseInformation);
+                    return dataForComponent;
                 }
             })
         )
     }
 
-    getCourseInformation() {
-        return this.courseInformation;
-    }
-
-    getSelectedCourse() {
-        return this.selectedCourse;
-    }
-
-    getSelectedSection() {
-        return this.selectedSection;
-    }
-
-    updateSelectedCourse(code) {
-        // console.log(">> ", this.courseInformation);
-        for (let course of this.courseInformation) {
-            if (course["code"] === code) {
-                course["selected"] = true;
-                this.selectedCourse = code;
-            } else {
-                course["selected"] = false;
-            }
+    getSelectedCourseCode() {
+        let courseObject = this.selectedCourseObject;
+        if (courseObject) {
+            return courseObject["code"];
+        } else {
+            return null;
         }
     }
 
-    updateSelectedSection(section) {
-        console.log(">> selected course", this.selectedCourse);
-        let sectionsOfSelectedCourse = this.courseInformation.find(
-            course => course["code"] === this.selectedCourse
-        ).section;
-        // console.log(">> sections of selected course", sectionsOfSelectedCourse);
-        let selectedSectionId;
-        for (let sectionObj of sectionsOfSelectedCourse) {
-            if (sectionObj["section"] == section) {
-                sectionObj["selected"] = true;
-                this.selectedSection = section;
-                selectedSectionId = sectionObj["id"];
-            } else {
-                sectionObj["selected"] = false;
-            }
+    getSelectedCourseObject() {
+        return this.selectedCourseObject;
+    }
+
+    getSelectedSectionObject() {
+        return this.selectedSectionObject;
+    }
+
+    getSectionsOfSelectedCourse() {
+        let selectedCourseCode = this.getSelectedCourseCode();
+        if (selectedCourseCode && this.courseInformation) {
+            let sections = this.courseInformation[selectedCourseCode];
+            return sections;
+        } else {
+            return [];
         }
-        return [this.selectedCourse, this.selectedSection, selectedSectionId];
+    }
+
+    updateSelectedCourseObject(courseObject) {
+        this.selectedCourseObject = courseObject;
+        this.selectedSectionObject = null;      // Invalidate saved section
+    }
+
+    updateSelectedSection(sectionObject) {
+        this.selectedSectionObject = sectionObject;
+    }
+
+    formatCourseInfoForStore(coursesArray) {
+        let formattedObj = {};
+        for (let courseObject of coursesArray) {
+            let courseCode = courseObject["code"];
+            let sectionsArray = courseObject["section"];
+            formattedObj[courseCode] = sectionsArray;
+        }
+        return formattedObj;
+    }
+
+    /**
+     * A Course Array will be sent to component;
+     * 
+     * Format for the Array will be as follows:
+     * Assuming the 'CSE123' course is currently selected course;
+     * Courses:  [{'code': 'CSE123', 'selected': true} .... { ... 'selected': false} ]
+     */
+    formatCourseInfoForComponent(courseInformation) {
+        let selectedCourseCode = this.selectedCourseObject;
+
+        let coursesArray = [];
+        for (let courseCode in courseInformation) {
+            coursesArray.push({
+                'code': courseCode
+            })
+        }
+        return coursesArray;
     }
 }

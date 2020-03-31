@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .sideBar-header{
     display: flex;
@@ -5,6 +6,19 @@
     justify-content: space-around;
     padding: 10px;
     height: 100px;
+=======
+.active {
+    background-color: #1ac0d266;
+    font-weight: bold;
+}
+
+.sidebar-menu-item a {
+    color: white;
+}
+
+.svg-inline--fa {
+    margin-right: 6px !important;
+>>>>>>> 46983fab70db3a310ffbaf722ff22dff5ea44c75
 }
 
 .sideBar-header-img{

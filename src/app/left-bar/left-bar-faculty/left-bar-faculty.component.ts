@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UserService, User } from '../../user/user.service';
 @Component({
     selector: 'left-bar-faculty',
     templateUrl: './left-bar-faculty.component.html',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftBarFacultyComponent implements OnInit {
 
-    constructor( ) { }
-    ngOnInit(): void {
+    constructor( private userService: UserService ) { }
     
+    user: User;
+
+    ngOnInit(): void {
+        this.user = this.userService.getUserInfo();
     }
 }
