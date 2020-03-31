@@ -11,6 +11,7 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { AdminSectionsComponent } from './admin-sections/admin-sections.component';
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
 import { AdminReportsComponent } from './admin-reports/admin-reports.component';
+import { DemoUsersComponent } from './demo-users/demo-users.component';
 
 const routes: Routes = [
     {
@@ -49,6 +50,10 @@ const routes: Routes = [
             }, {
                 path: 'profile',
                 component: AdminProfileComponent,
+            }
+            , {
+                path: 'user',
+                component: DemoUsersComponent,
             }
         ]
     }

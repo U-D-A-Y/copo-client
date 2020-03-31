@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6 mt-5">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between"> <p class="mb-0">User List</p>
+                    <button type="button" class="btn btn-primary mb-0" (click)="addNewItem()"><i class="fa fa-plus"></i>
+                        Add</button></div>
+         
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col">#</th>
+                                <th scope="col">Faculty Initial</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                     
+                            <tr *ngFor="let item of user;index as i">
+                                <th scope="row" class="text-center">{{i}}</th>
+                                <td class="text-center" (dblclick)="activeEditMode(item)">
+                                    <!-- <span *ngIf="!item.editing" >{{item.name}}</span> -->
+                                    <input *ngIf="item.editing" type="text" class="form-control" name="item.name +i" [(ngModel)]="item.name" [disabled]="!item.editing">
+                                </td>
+                                <td class="text-center" (dblclick)="activeEditMode(item)">
+                                    <!-- <span *ngIf="!item.editing" >{{item.password }}</span> -->
+                                    <input *ngIf="item.editing" type="password" class="form-control" name="item.password +i" [(ngModel)]="item.password" [disabled]="!item.editing">
+                                </td>
+                                
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-dark btn-sm m-1"><i class="fa fa-eye"></i></button>
+                                    <button type="button" class="btn btn-warning btn-sm m-1" (click)="updateItem(item)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm m-1" (click)="deleteItem(item)"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                         
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>

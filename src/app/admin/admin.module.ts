@@ -17,6 +17,8 @@ import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { AdminChartsComponent } from './admin-charts/admin-charts.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { LeftBarModule } from '../left-bar/left-bar.module';
+import { DemoUsersComponent } from './demo-users/demo-users.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { LeftBarModule } from '../left-bar/left-bar.module';
         AdminCopoComponent,
         AdminReportsComponent,
         AdminChartsComponent,
-        AdminProfileComponent
+        AdminProfileComponent,
+        DemoUsersComponent
     ],
     imports: [
         CommonModule,
@@ -38,6 +41,7 @@ import { LeftBarModule } from '../left-bar/left-bar.module';
         AdminRoutingModule,
         AgGridModule,
         SharedModule,
+        FormsModule
     ]
 })
 export class AdminModule { }

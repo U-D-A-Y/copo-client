@@ -1,6 +1,7 @@
 .c-card{
     box-shadow: 6px 6px 29px -6px rgba(0,0,0,0.75);
     padding: 15px;
+    border-radius: 5px;
 }
 .c-card-body{
     display: flex;
@@ -15,10 +16,17 @@
 }
 .c-card-thumbnel{
     position: absolute;
-    top: -30px;
+    top: -37px;
     width: 100px;
     height: 100px;
     border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #75daad;
 }
 .c-card-body-content{
     width: 60%;
@@ -27,7 +35,28 @@
 
 .c-card-footer{
     display: flex;
+    justify-content: space-around;
+}
+.c-card-footer::before{
+    position: absolute;
+    width: 80%;
+    content: "";
+    height: 1px;
+    background-color: darkgrey;
+    
 }
 .c-btn-1{
-
+    margin: 10px;
+    width: 150px;
+    height: 40px;
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+    color:teal;
+}
+.c-btn-1:hover{
+    border: solid 2px teal;
+    border-radius: 3px;
+    cursor: pointer;
+   
 }
