@@ -15,6 +15,7 @@ import { DemoUsersComponent } from './demo-users/demo-users.component';
 
 import { AuthGuard } from '../guard/auth.guard';
 import { RoleGuard } from '../guard/role.guard';
+import { AdminCourseDetailComponent } from './admin-course-detail/admin-course-detail.component';
 const routes: Routes = [
     {
         path: 'admin',
@@ -57,6 +58,10 @@ const routes: Routes = [
             , {
                 path: 'user',
                 component: DemoUsersComponent,
+            },
+            {
+                path: 'course_detail',
+                component: AdminCourseDetailComponent,
             }
         ]
     }

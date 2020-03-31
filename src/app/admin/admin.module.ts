@@ -19,6 +19,7 @@ import { AdminChartsComponent } from './admin-charts/admin-charts.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { LeftBarModule } from '../left-bar/left-bar.module';
 import { DemoUsersComponent } from './demo-users/demo-users.component';
+import { AdminCourseDetailComponent } from './admin-course-detail/admin-course-detail.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { DemoUsersComponent } from './demo-users/demo-users.component';
         AdminReportsComponent,
         AdminChartsComponent,
         AdminProfileComponent,
-        DemoUsersComponent
+        DemoUsersComponent,
+        AdminCourseDetailComponent
     ],
     imports: [
         CommonModule,
