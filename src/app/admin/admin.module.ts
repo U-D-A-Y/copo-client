@@ -19,7 +19,6 @@ import { AdminChartsComponent } from './admin-charts/admin-charts.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { LeftBarModule } from '../left-bar/left-bar.module';
 import { DemoUsersComponent } from './demo-users/demo-users.component';
-import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
