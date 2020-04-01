@@ -10,6 +10,26 @@ export class AdminReportService {
 
     proxy = "/api";
 
+    getAllStudents() {
+        let apiUlr = this.proxy + '/admin/students';
+        return this.http.get(apiUlr)
+        .pipe(
+            map(result => {
+                return result["data"];
+            })
+        )
+    }
+
+    getCurrentOfferedCourses() {
+        let apiUrl = this.proxy + '/admin/courses/offered/current';
+        return this.http.get(apiUrl)
+        .pipe(
+            map(result => {
+                return result["data"];
+            })
+        )
+    }
+
     getCourseAndStudentReport(course, student) {
         let courseQuery = this.getUrlformArray('course', course);
         let studentQuery = this.getUrlformArray('student', student);
@@ -130,7 +150,7 @@ export class AdminReportService {
 
     getUrlformArray(type, data) {
         let url = data.map(item => {
-            return type + '[]=' + item.toUpperCase()
+            return type + '[]=' + item.toString().toUpperCase()
         })
         return url.join('&')
     }

@@ -16,6 +16,9 @@ export class AdminReportsComponent implements OnInit {
         private service: AdminReportService
     ) { }
 
+    offeredCourseList: any;
+    studentsList: any;
+
     reportColDefs: any;
     reportRowData: any;
 
@@ -26,7 +29,14 @@ export class AdminReportsComponent implements OnInit {
     studentPillTextList = [];
 
     ngOnInit(): void {
-
+        this.service.getCurrentOfferedCourses()
+        .subscribe(result => {
+            this.offeredCourseList = result;
+        })
+        this.service.getAllStudents()
+        .subscribe(result => {
+            this.studentsList = result;
+        })
     }
 
     @ViewChild('coursePillBox') coursePillBox: ElementRef;
@@ -83,16 +93,20 @@ export class AdminReportsComponent implements OnInit {
         this.reportRowData = [];
         if (this.coursePillTextList.length > 0 && this.studentPillTextList.length > 0) {
             this.reportColDefs = this.getCol('courseAndStudentPo');
+            let offeredCoursePks = this.convertCourseCodeListToPk(this.coursePillTextList);
+            let studentPKs = this.convertStudentIdToPk(this.studentPillTextList);
             this.reportRowData = this.service.getCourseAndStudentReport(
-                this.coursePillTextList, this.studentPillTextList
+                offeredCoursePks, studentPKs
             )
         } else if (this.studentPillTextList.length > 0) {
             this.reportColDefs = this.getCol('studentPo');
-            this.reportRowData = this.service.getStudentReport(this.studentPillTextList);
+            let pks = this.convertStudentIdToPk(this.studentPillTextList);
+            this.reportRowData = this.service.getStudentReport(pks);
         }
         else if (this.coursePillTextList.length > 0) {
             this.reportColDefs = this.getCol('coursePo');
-            this.reportRowData = this.service.getCourseReport(this.coursePillTextList);
+            let pks = this.convertCourseCodeListToPk(this.coursePillTextList)
+            this.reportRowData = this.service.getCourseReport(pks);
         }
     }
 
@@ -105,5 +119,41 @@ export class AdminReportsComponent implements OnInit {
             case 'courseAndStudentPo':
                 return getCourseAndStudentPoReport();
         }
+    }
+
+    getOfferedCoursePkFromCourseCode(courseCode) {
+        let found = this.offeredCourseList.find(course => {
+            return course["course_code"] == courseCode
+        })
+        if (!found) {
+            alert(`"${courseCode}" is not offered this semester`);
+            return null;
+        } else {
+            return found["offered_course_pk"];
+        }
+    }
+
+    convertCourseCodeListToPk(courseCodeList) {
+        let pks = [];
+        courseCodeList.forEach(code => {
+            let pk = this.getOfferedCoursePkFromCourseCode(code);
+            if (pk) {
+                pks.push(pk);
+            }
+        });
+        return pks;
+    }
+
+    convertStudentIdToPk(studentIdList) {
+        let pks = [];
+        studentIdList.forEach(id => {
+            let found = this.studentsList.find(s => {
+                return s["student_id"] === id
+            })
+            if (found) {
+                pks.push(found["student_pk"]);
+            }
+        })
+        return pks;
     }
 }
