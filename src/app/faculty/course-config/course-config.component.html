@@ -81,7 +81,7 @@
                         <div class="student-table-scrol" style="height: 470px;">
                             <div class="col-md-12 table-scroling">
                                 <ag-grid-angular #studentAgGrid [columnDefs]="studentColDefs"
-                                    [rowData]="studentRowData | async" style="height: 100%;" class="ag-theme-balham">
+                                    [rowData]="studentRowData | async" style="height: 100%;" class="ag-theme-alpine">
                                 </ag-grid-angular>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                                                         #allAssessmentsAgGrid
                                                         [rowSelection]="'multiple'"
                                                         [suppressRowClickSelection]="true"
-                                                        class="ag-theme-balham" style="height: 100%;"
+                                                        class="ag-theme-alpine" style="height: 100%;"
                                                         [columnDefs]="allAssessmentsColDefs"
                                                         [rowData]="allAssessmentsRowData | async">
                                                     </ag-grid-angular>
@@ -145,7 +145,7 @@
                         <div class="col-md-12 table-scroling">
                             <br>
                             <ag-grid-angular #assessmentAgGrid [columnDefs]="assessmentColDefs"
-                                [rowData]="assessmentRowData | async" style="height: 100%;" class="ag-theme-balham">
+                                [rowData]="assessmentRowData | async" style="height: 100%;" class="ag-theme-alpine">
                             </ag-grid-angular>
                         </div>
                     </div>
