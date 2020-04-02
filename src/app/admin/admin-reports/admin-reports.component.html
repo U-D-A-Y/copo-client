@@ -3,36 +3,13 @@
     <main class="page-content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="form-group 
-                    text-center">
-
-                                        <!-- <label for="">Course</label> -->
-                                        <select class="form-control" id="yearSelector">
-                                            <option selected="" disabled>Year</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="form-group text-center">
-                                        <!-- <label for="">Section</label> -->
-                                        <select class="form-control" id="semesterSelector">
-                                            <option selected="" disabled>Semester</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <app-semester-selector class="row">
+                    </app-semester-selector>
                 </div>
             </div>
-
+            <hr/>
             <div class="row">
                 <div class="col-md-12 student-mark-input-table-border">
                     <div class="row mt-3">

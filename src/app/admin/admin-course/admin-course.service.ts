@@ -8,7 +8,7 @@ export class AdminCourseService {
     apiProxy = "/api";
 
     getOfferedCourses() {
-        let apiUrl = this.apiProxy + '/admin/courses/offered';
+        let apiUrl = this.apiProxy + '/admin/courses/offered/current';
         return this.http.get(apiUrl)
         .pipe(
             map(result => {

@@ -108,6 +108,8 @@ export class AdminReportsComponent implements OnInit {
             let pks = this.convertCourseCodeListToPk(this.coursePillTextList)
             this.reportRowData = this.service.getCourseReport(pks);
         }
+
+        this.reportAgGrid.api.sizeColumnsToFit();
     }
 
     getCol(type) {
